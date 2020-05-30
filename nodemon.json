@@ -1,0 +1,10 @@
+{
+  "watch": [
+    "src"
+  ],
+  "ext": "ts",
+  "ignore": [
+    "src/**/*.spec.ts"
+  ],
+  "exec": "set NODE_ENV=production && node -r tsconfig-paths/register --inspect=3000 --require ts-node/register src/main.ts"
+}
