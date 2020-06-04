@@ -26,16 +26,16 @@ export class AuthService {
         let image_path = '';
         let division_code = null;
         let division_name = null;
-        const empData = '';
+        const empData = await this.userService.getEmployee(id);
         const images = ''
         const main_company_id = 0;
-        const job_title_id = 0;
-        const division_id = 0;
+        const job_title_id = empData.JOB_TITLE_ID;
+        const division_id = empData.DIV_ID;
         // if (empData[0].DIVISION_ID > 0) {
         //     division_code = '';
         //     division_name = '';
         // }
-        const employee_name = '';
+        const employee_name = empData.EMP_NAME;
         const company_name = '';
         const company_code = '';
         const company_logo = '';
@@ -63,7 +63,8 @@ export class AuthService {
             image_url,
             company_logo,
             mobile_phone,
-            daily_exp: today
+            daily_exp: conf.default.DAILY_EXPIRED,
+            daily_date: today
         };
         const accessToken = this.jwtService.sign(user);
         console.log(accessToken)

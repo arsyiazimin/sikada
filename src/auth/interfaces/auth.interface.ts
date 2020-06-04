@@ -13,5 +13,6 @@ export interface AuthInterfaces {
     image_url: string;
     company_logo: string;
     mobile_phone: string;
-    daily_exp: Date;
+    daily_exp: number;
+    daily_date: Date;
 }

@@ -60,7 +60,7 @@ export class UserService {
     }
 
     async adminUser() {
-        const result = this.userRepository.find({ EMP_ID: 180 });
+        const result = this.userRepository.find({ EMP_ID: 2 });
         return result;
     }
 
@@ -72,5 +72,9 @@ export class UserService {
             .where("LOWER(user.LOGIN_CODE) = :emp_username AND user.STATUS_ID = :status_id", { emp_username: username, status_id: 1 })
             .getOne();
         return user;
+    }
+
+    async getEmployee(emp_id: number): Promise<Employee> {
+        return await this.EmployeeRepository.findOne(emp_id);
     }
 }
