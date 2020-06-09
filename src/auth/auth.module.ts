@@ -14,6 +14,7 @@ import { UserService } from 'global/user/services/user/user.service';
       secretOrPrivateKey: Configuration.SECRET,
       signOptions: {
         expiresIn: new ConfigurationService().get(Configuration.JWT_EXPIRED),
+        algorithm:'HS256'
       },
     }),
     UserModule,

@@ -60,7 +60,7 @@ export class UserService {
     }
 
     async adminUser() {
-        const result = this.userRepository.find({ EMP_ID: 2 });
+        const result = this.userRepository.find({ EMP_ID: 6 });
         return result;
     }
 
