@@ -74,6 +74,16 @@ export class UserService {
         return user;
     }
 
+    async getUser(emp_id: number, username: string): Promise<UserLogin> {
+        username = username.toLowerCase();
+        const user = await getManager()
+            .createQueryBuilder(UserLogin, "user")
+            .leftJoinAndSelect("Employee", "emp", 'emp.EMP_ID = user.EMP_ID')
+            .where("user.EMP_ID = :emp_id AND LOWER(user.LOGIN_CODE) = :emp_username AND user.STATUS_ID = :status_id", { emp_id: emp_id, emp_username: username, status_id: 1 })
+            .getOne();
+        return user;
+    }
+
     async getEmployee(emp_id: number): Promise<Employee> {
         return await this.EmployeeRepository.findOne(emp_id);
     }

@@ -76,7 +76,7 @@ export class AuthService {
 
     async validateUser(payload: JwtPayload): Promise<any> {
         if (payload && payload.username) {
-            const user = await this.userService.getUserByUsername(payload.username);
+            const user = await this.userService.getUser(payload.id, payload.username);
             // const role = await this._roleAssign.getAssigns(payload.id);
             // const user = '';
             const role = '';
