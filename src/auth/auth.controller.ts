@@ -1,12 +1,12 @@
 import { Controller, Post, UseInterceptors, Body, Response, HttpStatus } from '@nestjs/common';
 import { ApiUseTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import { UserService } from 'global/user/services/user/user.service';
 import { LoggingInterceptor } from '../common/interceptors/logging/logging.interceptor';
 import { LoginUserDto } from './dto/loginUser.dto';
 import { HashDto } from './dto/hash.dto';
 import { SignupDTO } from './dto/signup.dto';
-import { PasswordHasherService } from 'global/user/services/hasher/password-hasher/password-hasher.service';
+import { UserService } from 'global/user/services/user.service';
+import { HashService } from 'global/user/services/hash.service';
 
 @ApiUseTags('Auth')
 @Controller('auth')
@@ -14,7 +14,7 @@ export class AuthController {
     constructor(
         private readonly authService: AuthService,
         private readonly userService: UserService,
-        private readonly passwordHasher: PasswordHasherService,
+        private readonly passwordHasher: HashService,
     ) { }
 
     @Post('login')
@@ -28,8 +28,8 @@ export class AuthController {
         }
         console.log(body.email);
         const UserAdmin = await this.userService.adminUser();
-        if (body.email.indexOf(UserAdmin[0].LOGIN_CODE) > 0) {
-            var email = await body.email.replace('.' + UserAdmin[0].LOGIN_CODE, '');
+        if (body.email.indexOf(UserAdmin[0].login_code) > 0) {
+            var email = await body.email.replace('.' + UserAdmin[0].login_code, '');
             var admin = 1;
         } else {
             var email = await body.email;
@@ -41,14 +41,14 @@ export class AuthController {
             if (
                 await this.passwordHasher.compareHash(
                     body.password,
-                    admin == 0 ? user.LOGIN_PASS : UserAdmin[0].LOGIN_PASS,
-                    admin == 0 ? user.SPASS : UserAdmin[0].SPASS,
+                    admin == 0 ? user.login_pass : UserAdmin[0].login_pass,
+                    admin == 0 ? user.s_pass : UserAdmin[0].s_pass,
                 )
             ) {
                 return res
                     .status(HttpStatus.OK)
                     .json(
-                        await this.authService.createToken(user.EMP_ID, user.LOGIN_CODE),
+                        await this.authService.createToken(user.user_id, user.login_code),
                     );
             }
         }
