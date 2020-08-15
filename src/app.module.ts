@@ -12,6 +12,7 @@ import { EverytingSubscriber } from 'common/subscriber/EverythingSubscriber';
 import { GlobalModule } from './global/global.module';
 import { typeOrmConfig } from "./config/typeorm.config";
 import { mailerConfig } from "./config/mailer.config";
+import { KonstituenModule } from './modules/konstituen/konstituen.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { mailerConfig } from "./config/mailer.config";
     AuthModule,
     GlobalModule,
     MailerModule.forRoot(mailerConfig),
+    KonstituenModule,
   ]
 })
 export class AppModule implements NestModule {

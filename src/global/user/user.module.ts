@@ -1,17 +1,15 @@
 import { Module } from '@nestjs/common';
+import { UserService } from './services/user.service';
+import { HashService } from './services/hash.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserService } from './services/user/user.service';
-import { UserLogin } from "./entity/user-login.entity";
-import { Employee } from 'global/employee/entity/Employee.entity';
-import { PasswordHasherService } from './services/hasher/password-hasher/password-hasher.service';
-import { SharedModule } from 'shared/shared.module';
-import { EmailService } from 'shared/mailer/email-service/email-service.service';
+import { User } from './entity/user.entity';
+import { UserLogin } from 'global/user-login/entity/userLogin.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([UserLogin, Employee])
-  ],
-  providers: [UserService, PasswordHasherService],
-  exports: [UserService, PasswordHasherService]
+    imports: [
+        TypeOrmModule.forFeature([User, UserLogin])
+    ],
+    providers: [UserService, HashService],
+    exports: [UserService, HashService]
 })
 export class UserModule { }
