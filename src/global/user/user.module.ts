@@ -3,7 +3,7 @@ import { UserService } from './services/user.service';
 import { HashService } from './services/hash.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity/user.entity';
-import { UserLogin } from 'global/user-login/entity/userLogin.entity';
+import { UserLogin } from '../../global/user-login/entity/userLogin.entity';
 
 @Module({
     imports: [
