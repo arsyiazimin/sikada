@@ -36,6 +36,24 @@ export class DptEntity {
     @Column()
     id_kecamatan: number;
 
+    @Column()
+    id_kelurahan: number;
+
+    @Column()
+    id_tps: number;
+
+    @Column()
+    create_id: number;
+
+    @Column()
+    create_date: Date;
+
+    @Column()
+    update_id: number;
+
+    @Column()
+    update_date: Date;
+
     @ManyToOne(type => Kecamatan, kec => kec.DPT, { cascade: true, onDelete: 'CASCADE' })
     @JoinColumn({ name: 'id_kecamatan' })
     KECAMATAN: Kecamatan
