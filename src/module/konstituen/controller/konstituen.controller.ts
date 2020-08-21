@@ -29,7 +29,7 @@ export class KonstituenController {
         return this.konstituenService.uploadData(file, res)
     }
 
-    @Get('getalldata')
+    @Get('getAllData')
     async getAllData(@Res() res) {
         return await this.konstituenService.getAllData(res)
     }
