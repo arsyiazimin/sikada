@@ -31,7 +31,7 @@ export class KonstituenService {
         @InjectRepository(DptV) private readonly DptVRepo: Repository<DptV>,
     ) { }
 
-    __path = 'src';
+    __path = 'dist/src';
     // helperclass = new KonstituenHelper();
 
     async uploadData(file: any, @Res() res): Promise<any> {
@@ -54,12 +54,15 @@ export class KonstituenService {
                         // let filename = 'Summary-';
                         let prefixname = resFile.filename;
                         let getfiles = [];
-
+                        console.log('pathprefix')
+                        console.log(pathprefix)
                         await Fs.readdirSync(pathprefix).forEach((files) => {
                             if (files.indexOf(prefixname) != -1) {
                                 getfiles.push(files)
                             }
                         });
+                        console.log('getfiles')
+                        console.log(getfiles)
 
                         let insertdata = [];
                         let original = resFile.filename.split('-');
@@ -96,6 +99,7 @@ export class KonstituenService {
                         if (kecamatan) {
                             for (let ind in getfiles) {
                                 let path = Path.resolve(this.__path, folder, resFile.filename);
+                                console.log('path')
                                 console.log(path)
                                 await csv({ trim: true }).fromFile(path)
                                     .then((val) => {
@@ -106,7 +110,7 @@ export class KonstituenService {
                                     });
                             };
                             // console.log(insertdata)
-                            unlinkSync(`src/file/${moment(new Date()).format('YYYY')}/data-konstituen/${resFile.filename}`)
+                            unlinkSync(`dist/src/file/${moment(new Date()).format('YYYY')}/data-konstituen/${resFile.filename}`)
                             for (let index = 0; index < insertdata.length; index++) {
                                 let data = {
                                     ...insertdata[index],
@@ -159,11 +163,12 @@ export class KonstituenService {
 
     async uploadPath(file) {
 
-        const exacpath: string = 'src/file/';
+        const exacpath: string = 'dist/src/file/';
         let finalpath: string;
         let finalName;
 
         let dir = moment(new Date()).format('YYYY') + '/data-konstituen/';
+        // const dir = Path.resolve(__dirname, '../../../file/' + moment(new Date()).format('YYYY') + '/data-konstituen/');
 
         if (!existsSync(exacpath + dir)) {
             await mkDir(exacpath + dir);
