@@ -4,7 +4,7 @@ import * as md5 from 'md5';
 import * as crypto from 'crypto';
 
 @Injectable()
-export class PasswordHasherService {
+export class HashService {
     async hasPassword(password: string) {
         // const bcryptHash = bcrypt.hash(password, 10);
         const encryptedPass = await this.encryptCrypto(password)
@@ -49,8 +49,18 @@ export class PasswordHasherService {
             return false
         }
     }
+
     async compareBcrypt(password, salt): Promise<boolean> {
         // const pass = await this.encryptCrypto(password)
         return await bcrypt.compare(password, salt)
+    }
+
+    async compareMd5(password: string | undefined, hash: string | undefined): Promise<boolean> {
+        const enc = md5(password);
+        if (enc === hash) {
+            return true
+        } else {
+            return false
+        }
     }
 }

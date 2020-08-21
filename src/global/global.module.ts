@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { EmployeeModule } from './employee/employee.module';
-import { UserModule } from './user/user.module';
 import { SharedModule } from 'shared/shared.module';
 import { MenuModule } from './menu/menu.module';
+import { UserModule } from './user/user.module';
+import { UserLoginModule } from './user-login/user-login.module';
 
 @Module({
-  imports: [EmployeeModule, UserModule, MenuModule]
+  imports: [MenuModule, UserModule, UserLoginModule]
 })
 export class GlobalModule {}
