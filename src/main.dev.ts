@@ -1,11 +1,11 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { AppModule  } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Transport } from '@nestjs/microservices';
 import * as helmet from 'helmet';
 import * as csurf from 'csurf';
 import * as rateLimit from 'express-rate-limit';
-import { MyLoggerService } from './logger/my-logger/my-logger.service';
+import { MyLoggerService } from 'logger/my-logger/my-logger.service';
 import * as fs from 'fs';
 import * as https from 'https';
 import * as express from 'express';
@@ -22,8 +22,7 @@ async function bootstrap() {
 
   const expressApp = express();
 
-  // const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
   //if use logger
   app.useLogger(app.get(MyLoggerService));
   app.use(helmet());
@@ -41,7 +40,7 @@ async function bootstrap() {
     ? `${AppModule.host}:${AppModule.port}`
     : `${AppModule.host}:${AppModule.port}`;
   console.log(hostDomain);
-
+  
   const swaggerOptions = new DocumentBuilder()
     .setTitle('API')
     .setDescription('API Documentation')
@@ -75,7 +74,6 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
   app.init();
-  // await https.createServer(expressApp).listen(process.env.PORT || 3000);
-  await app.listen(process.env.PORT || 3000);
+  await https.createServer(credentials, expressApp).listen(AppModule.port);
 }
 bootstrap();
