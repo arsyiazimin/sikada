@@ -1,1 +1,1 @@
-export * from 'shared/helper/email.helper';
+export * from '../../shared/helper/email.helper';

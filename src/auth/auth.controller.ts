@@ -5,8 +5,8 @@ import { LoggingInterceptor } from '../common/interceptors/logging/logging.inter
 import { LoginUserDto } from './dto/loginUser.dto';
 import { HashDto } from './dto/hash.dto';
 import { SignupDTO } from './dto/signup.dto';
-import { UserService } from 'global/user/services/user.service';
-import { HashService } from 'global/user/services/hash.service';
+import { UserService } from '../global/user/services/user.service';
+import { HashService } from '../global/user/services/hash.service';
 
 @ApiUseTags('Auth')
 @Controller('auth')
