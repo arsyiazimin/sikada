@@ -13,6 +13,7 @@ import { GlobalModule } from './global/global.module';
 import { typeOrmConfig } from "./config/typeorm.config";
 import { mailerConfig } from "./config/mailer.config";
 import { KonstituenModule } from './modules/konstituen/konstituen.module';
+import { Connection } from 'typeorm';
 
 @Module({
   imports: [
@@ -40,8 +41,10 @@ export class AppModule implements NestModule {
 
   constructor(
     // @Inject('MailerProvider') private readonly mailerProvider,
-    private readonly _configurationService: ConfigurationService) {
-
+    private readonly _configurationService: ConfigurationService,
+    private readonly connection: Connection
+  ) {
+    console.log('connectin status : ', connection.isConnected)
     // constructor(private readonly _configurationService: ConfigurationService) {
 
     AppModule.port = AppModule.normalizePort(
