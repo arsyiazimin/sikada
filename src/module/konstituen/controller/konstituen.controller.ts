@@ -1,4 +1,4 @@
-import { Controller, UseGuards, Post, UseInterceptors, UploadedFiles, Res } from '@nestjs/common';
+import { Controller, UseGuards, Post, UseInterceptors, UploadedFiles, Res, Get } from '@nestjs/common';
 import { ApiUseTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { KonstituenService } from '../service/konstituen.service';
@@ -25,7 +25,12 @@ export class KonstituenController {
             }
         })
     }))
-    async saveImageContentDesktop(@UploadedFiles() file, @Res() res) {
+    async uploadData(@UploadedFiles() file, @Res() res) {
         return this.konstituenService.uploadData(file, res)
+    }
+
+    @Get('getalldata')
+    async getAllData(@Res() res) {
+        return await this.konstituenService.getAllData(res)
     }
 }

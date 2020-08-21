@@ -1,6 +1,5 @@
 export default {
-  HOST: 'https://127.0.0.1', // dev
-  // HOST: 'https://sikada-app.herokuapp.com/', // dev
+  HOST: 'https://127.0.0.1', // prod
   PORT: '3000', // dev
   SECRET: 'asdasf;qqwrlmsdfmafk;rqwelqkrjlsdffsdfdsjhfksrweriuosfpyuirewbfmsdfbmsdfiwher;dsf;rerkhjgkertkr',
   JWT_EXPIRED: 604800,

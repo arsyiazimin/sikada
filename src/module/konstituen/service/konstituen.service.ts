@@ -16,6 +16,8 @@ import { tKelTps } from '../entity/tpKel.entity';
 const csv = require('csvtojson');
 const Path = require('path');
 const Fs = require('fs');
+import { RequestContext } from '../../../common/subscriber/RequestContext';
+import { DptV } from '../entity/view/DptV.entity';
 
 @Injectable()
 export class KonstituenService {
@@ -26,6 +28,7 @@ export class KonstituenService {
         @InjectRepository(Kelurahan) private readonly KelurahanRepo: Repository<Kelurahan>,
         @InjectRepository(TpsEntity) private readonly TpsEntityRepo: Repository<TpsEntity>,
         @InjectRepository(tKelTps) private readonly tKelTpsRepo: Repository<tKelTps>,
+        @InjectRepository(DptV) private readonly DptVRepo: Repository<DptV>,
     ) { }
 
     __path = 'src';
@@ -65,17 +68,9 @@ export class KonstituenService {
                         kel = kel[0].toLowerCase() + ' ' + kel[1].toLowerCase();
                         let tps = original[3].split('.')[0].toLowerCase();
 
-                        // const kecamatan = await getManager()
-                        //     .createQueryBuilder(Kecamatan, "kec")
-                        //     .leftJoinAndMapOne("kec.KELURAHAN", Kelurahan, "kel", "kec.id_kelurahan = kel.id_kelurahan")
-                        //     .leftJoinAndMapOne("kel.TPS", TpsEntity, "tps", "kel.id_tps = tps.id_tps")
-                        //     .where("LOWER(kec.nama_kecamatan) = :kec", { kec: kec })
-                        //     .andWhere("LOWER(kel.nama_kelurahan) = :kel", { kel: kel })
-                        //     .andWhere("LOWER(tps.nama_tps) = :tps", { tps: 'tps-' + tps })
-                        //     .getOne()
                         const kecamatan = await getManager()
                             .createQueryBuilder(Kecamatan, "kec")
-                            .leftJoinAndMapOne("kec.KELURAHAN", Kelurahan, "kel", "kec.id_kecamatan = kel.id_kecamatan")
+                            .leftJoinAndMapOne("kec.KEL", Kelurahan, "kel", "kec.id_kecamatan = kel.id_kecamatan")
                             .leftJoin(tKelTps, "keltps", "kel.id_kelurahan = keltps.id_kelurahan")
                             .leftJoinAndMapOne("kel.TPS", TpsEntity, "tps", "keltps.id_tps = tps.id_tps")
                             .where("LOWER(kec.nama_kecamatan) = :kec", { kec: kec })
@@ -83,6 +78,21 @@ export class KonstituenService {
                             .andWhere("LOWER(tps.nama_tps) = :tps", { tps: 'tps-' + tps })
                             .getOne()
 
+                        // const kecamatan = await getManager()
+                        //     .createQueryBuilder(Kecamatan, "kec")
+                        //     .where("LOWER(kec.nama_kecamatan) = :kec", { kec: kec })
+                        //     .getOne()
+
+                        // const kelurahan = await getManager()
+                        //     .createQueryBuilder(Kelurahan, "kel")
+                        //     .where("LOWER(kec.nama_kelurahan) = :kel", { kel: kel })
+                        //     .getOne();
+
+                        // const tpss = await getManager()
+                        //     .createQueryBuilder(TpsEntity, "tps")
+                        //     .andWhere("LOWER(tps.nama_tps) = :tps", { tps: 'tps-' + tps })
+                        //     .getOne()
+                        console.log(kecamatan)
                         if (kecamatan) {
                             for (let ind in getfiles) {
                                 let path = Path.resolve(this.__path, folder, resFile.filename);
@@ -95,10 +105,17 @@ export class KonstituenService {
                                         throw new Error(err);
                                     });
                             };
-                            console.log(insertdata)
+                            // console.log(insertdata)
                             unlinkSync(`src/file/${moment(new Date()).format('YYYY')}/data-konstituen/${resFile.filename}`)
                             for (let index = 0; index < insertdata.length; index++) {
-                                let data = { ...insertdata[index], id_kecamatan: kecamatan.id_kecamatan }
+                                let data = {
+                                    ...insertdata[index],
+                                    id_kecamatan: kecamatan.id_kecamatan,
+                                    id_kelurahan: kecamatan['KEL'].id_kelurahan,
+                                    id_tps: kecamatan['KEL']['TPS'].id_tps,
+                                    create_id: RequestContext.currentUser().login_id,
+                                    create_date: new Date()
+                                }
                                 let dataExisting = await this.dptRepo.findOne({ where: { no_kk: insertdata[index].no_kk, nik: insertdata[index].nik } })
                                 if (dataExisting) {
                                     throw new Error(`No KK : ${dataExisting.no_kk} dengan NIK : ${dataExisting.nik} Sudah ada`);
@@ -140,46 +157,6 @@ export class KonstituenService {
         }
     }
 
-    async generateInsert(value, kec, kel, tps) {
-        let data;
-        console.log('value')
-        console.log(value)
-        const connection = await getManager().connection;
-        const queryRunner = await connection.createQueryRunner();
-
-        await queryRunner.startTransaction();
-        try {
-            // const kecamatan = this.kecamatanRepo.findOne({ where: `LOWER(nama_kecamatan) = LOWER(${kec}) AND` })
-            const kecamatan = await getManager()
-                .createQueryBuilder(Kecamatan, "kec")
-                .leftJoinAndMapOne("kec.KELURAHAN", Kelurahan, "kel", "kec.id_kelurahan = kel.id_kelurahan")
-                .leftJoinAndMapOne("kel.TPS", TpsEntity, "tps", "kel.id_tps = tps.id_tps")
-                .where("LOWER(kec.nama_kecamatan) = :kec", { kec: kec })
-                .andWhere("LOWER(kel.nama_kelurahan) = :kel", { kel: kel })
-                .andWhere("LOWER(tps.nama_tps) = :tps", { tps: 'tps-' + tps })
-                .getOne()
-            console.log(kecamatan)
-            let insertdata = [];
-            // insertdata = await this.createSave(value);
-
-            // await queryRunner.manager.save(insertdata).catch(async err => {
-            //     throw new Error(err);
-            // });
-
-            await queryRunner.commitTransaction();
-            data = { 'Message': 'save successfully', result: '', error_bit: false };
-
-        } catch (error) {
-            await queryRunner.rollbackTransaction();
-            data = { 'Message': 'save error', result: error.message, error_bit: true };
-            throw new Error(error);
-        } finally {
-            await queryRunner.release();
-        }
-
-        return data;
-    }
-
     async uploadPath(file) {
 
         const exacpath: string = 'src/file/';
@@ -214,40 +191,16 @@ export class KonstituenService {
 
     }
 
-    async saveDate(filename) {
-        let data;
-        const pathprefix = Path.resolve(__dirname, '../../../file/data-konstituen/');
-        // let filename = 'Summary-';
-        let prefixname = filename;
-        let getfiles = [];
-
-        return new Promise(async (resolve, reject) => {
-            await Fs.readdirSync(pathprefix).forEach((files) => {
-                if (files.indexOf(prefixname) != -1) {
-                    getfiles.push(files)
-                }
-            });
-
-            let insertdata = [];
-            for (let ind in getfiles) {
-                // let filename = prefixname + '-' + ind + '.csv';
-                let path = Path.resolve(this.__path, 'file', filename);
-                await csv({ trim: true }).fromFile(path)
-                    .then((val) => {
-                        insertdata = [...insertdata, ...val]
-                    })
-                    .catch((err) => {
-                        console.log('save billing error fetch file')
-                        console.log(err)
-                    });
-            };
-            console.log(insertdata)
-            // data = await this.helperclass.generateInsert(insertdata);
-            if (data.error_bit == false) {
-                resolve(data)
-            } else {
-                reject(data)
-            }
-        })
+    async getAllData(@Res() res): Promise<DptV[]> {
+        try {
+            const data = await this.DptVRepo.find()
+            return res
+                .status(HttpStatus.OK)
+                .json({ message: 'data found', response: data });
+        } catch (error) {
+            return res
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .json({ message: error });
+        }
     }
 }

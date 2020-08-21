@@ -10,6 +10,7 @@ import { Kecamatan } from './entity/kecamatan.entity';
 import { DptEntity } from './entity/dpt.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { tKelTps } from './entity/tpKel.entity';
+import { DptV } from './entity/view/DptV.entity';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { tKelTps } from './entity/tpKel.entity';
       Kelurahan,
       Kecamatan,
       DptEntity,
-      tKelTps
+      tKelTps,
+      DptV
     ])
   ],
   controllers: [KonstituenController],
