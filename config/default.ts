@@ -1,5 +1,5 @@
 export default {
-  HOST: 'http://127.0.0.1', // dev
+  HOST: 'https://127.0.0.1', // dev
   // HOST: 'https://sikada-app.herokuapp.com/', // dev
   PORT: '3000', // dev
   SECRET: 'asdasf;qqwrlmsdfmafk;rqwelqkrjlsdffsdfdsjhfksrweriuosfpyuirewbfmsdfbmsdfiwher;dsf;rerkhjgkertkr',
