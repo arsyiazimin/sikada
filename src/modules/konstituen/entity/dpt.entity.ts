@@ -34,6 +34,9 @@ export class DptEntity {
     rw: string;
 
     @Column()
+    id_tim: number;
+
+    @Column()
     id_kecamatan: number;
 
     @ManyToOne(type => Kecamatan, kec => kec.DPT, { cascade: true, onDelete: 'CASCADE' })

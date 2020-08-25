@@ -1,10 +1,11 @@
-import { Controller, UseGuards, Post, UseInterceptors, UploadedFiles, Res } from '@nestjs/common';
+import { Controller, UseGuards, Post, UseInterceptors, UploadedFiles, Res, Put, Param, Body } from '@nestjs/common';
 import { ApiUseTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { KonstituenService } from '../service/konstituen.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { extname } from 'path';
 import { diskStorage } from 'multer';
+import { DptEntity } from '../entity/dpt.entity';
 
 @ApiUseTags('Konstituen')
 @Controller('konstituen')
@@ -27,5 +28,10 @@ export class KonstituenController {
     }))
     async saveImageContentDesktop(@UploadedFiles() file, @Res() res) {
         return this.konstituenService.uploadData(file, res)
+    }
+
+    @Put('update/:id')
+    async updateKonstituen(@Param('id')id:number, @Body() body, @Res() res ):Promise<DptEntity>{
+        return await this.konstituenService.updateKonstituen(id,body,res);
     }
 }

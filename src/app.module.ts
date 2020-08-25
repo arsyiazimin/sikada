@@ -13,6 +13,10 @@ import { GlobalModule } from './global/global.module';
 import { typeOrmConfig } from "./config/typeorm.config";
 import { mailerConfig } from "./config/mailer.config";
 import { KonstituenModule } from './modules/konstituen/konstituen.module';
+import { TpsModule } from './modules/tps/tps.module';
+import { KelurahanModule } from './modules/kelurahan/kelurahan.module';
+import { KecamatanModule } from './modules/kecamatan/kecamatan.module';
+import { TimPemenanganModule } from './modules/tim-pemenangan/tim-pemenangan.module';
 
 @Module({
   imports: [
@@ -23,6 +27,10 @@ import { KonstituenModule } from './modules/konstituen/konstituen.module';
     GlobalModule,
     MailerModule.forRoot(mailerConfig),
     KonstituenModule,
+    TpsModule,
+    KelurahanModule,
+    KecamatanModule,
+    TimPemenanganModule,
   ]
 })
 export class AppModule implements NestModule {
