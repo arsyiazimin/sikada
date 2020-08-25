@@ -208,4 +208,37 @@ export class KonstituenService {
                 .json({ message: error });
         }
     }
+
+    async updateKonstituen(id:number, body:any, @Res() res): Promise<DptEntity>{
+        const connection = await getManager().connection;
+        const queryRunner = await connection.createQueryRunner();
+
+        await queryRunner.startTransaction();
+        try {
+            const data = await this.dptRepo.findOne(id);
+            if (data){
+                const saveDpt = await this.dptRepo.create(body);
+
+                await queryRunner.manager.save(saveDpt).catch(async error =>{
+                    throw new Error(error);
+                });
+
+                await queryRunner.commitTransaction();
+                return res
+                    .status(HttpStatus.OK)
+                    .json({message:'Update Successfully'});
+            }else {
+                return res
+                    .status(HttpStatus.OK)
+                    .json({ message: 'No data Found'});
+            }
+        } catch (error) {
+            await queryRunner.rollbackTransaction();
+            return res
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .json({ message: error});
+        } finally{
+            await queryRunner.release();
+        }
+    }
 }
