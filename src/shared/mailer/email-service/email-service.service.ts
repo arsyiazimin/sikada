@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nest-modules/mailer';
-import { emailTemplate } from 'shared/interface/email/email-template.interface';
+import { emailTemplate } from '../../../shared/interface/email/email-template.interface';
 import * as config from 'config'
 
 const username = process.env.SMTP_USERNAME;
