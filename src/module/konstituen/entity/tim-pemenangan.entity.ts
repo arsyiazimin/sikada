@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne } from "typeorm";
+import { DptEntity } from "./dpt.entity";
 
 @Entity('m_tim')
 export class TimPemenangan{
@@ -7,4 +8,10 @@ export class TimPemenangan{
     
     @Column()
     nama_tim : string;
+
+    @OneToMany(type=>DptEntity, dpt=>dpt.tim_dpt)
+    dpt_tim:DptEntity
+
+    @OneToOne(type=>DptEntity, ketua_dpt=>ketua_dpt.ketua_tim)
+    dpt_ketua:DptEntity
 }
