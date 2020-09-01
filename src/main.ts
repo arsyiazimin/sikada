@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule  } from './app.module';
+import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Transport } from '@nestjs/microservices';
 import * as helmet from 'helmet';
@@ -22,7 +22,8 @@ async function bootstrap() {
 
   const expressApp = express();
 
-  const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
+  // const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
+  const app = await NestFactory.create(AppModule);
   //if use logger
   app.useLogger(app.get(MyLoggerService));
   app.use(helmet());
@@ -36,36 +37,36 @@ async function bootstrap() {
   //   },
   // });
 
-  const hostDomain = AppModule.isDev
-    ? `${AppModule.host}:${AppModule.port}`
-    : `${AppModule.host}:${AppModule.port}`;
-  console.log(hostDomain);
-  
-  const swaggerOptions = new DocumentBuilder()
-    .setTitle('API')
-    .setDescription('API Documentation')
-    .setVersion('1.0.0')
-    .setHost(hostDomain.split('//')[1])
-    .setSchemes('https')
-    .setBasePath('/api')
-    .addBearerAuth('Authorization', 'header')
-    .build();
+  // const hostDomain = AppModule.isDev
+  //   ? `${AppModule.host}:${AppModule.port}`
+  //   : `${AppModule.host}:${AppModule.port}`;
+  // console.log(hostDomain);
 
-  const swaggerDoc = SwaggerModule.createDocument(app, swaggerOptions);
+  // const swaggerOptions = new DocumentBuilder()
+  //   .setTitle('API')
+  //   .setDescription('API Documentation')
+  //   .setVersion('1.0.0')
+  //   .setHost(hostDomain.split('//')[1])
+  //   .setSchemes('https')
+  //   .setBasePath('/api')
+  //   .addBearerAuth('Authorization', 'header')
+  //   .build();
 
-  app.use('/api/docs/swagger.json', (req, res) => {
-    res.send(swaggerDoc);
-  });
+  // const swaggerDoc = SwaggerModule.createDocument(app, swaggerOptions);
 
-  SwaggerModule.setup('/api/docs', app, null, {
-    swaggerUrl: `${hostDomain}/api/docs/swagger.json`,
-    explorer: true,
-    swaggerOptions: {
-      docExpansion: 'list',
-      filter: true,
-      showRequestDuration: true,
-    },
-  });
+  // app.use('/api/docs/swagger.json', (req, res) => {
+  //   res.send(swaggerDoc);
+  // });
+
+  // SwaggerModule.setup('/api/docs', app, null, {
+  //   swaggerUrl: `${hostDomain}/api/docs/swagger.json`,
+  //   explorer: true,
+  //   swaggerOptions: {
+  //     docExpansion: 'list',
+  //     filter: true,
+  //     showRequestDuration: true,
+  //   },
+  // });
 
   if (module.hot) {
     module.hot.accept();
@@ -74,6 +75,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
   app.init();
-  await https.createServer(credentials, expressApp).listen(AppModule.port);
+  // await https.createServer(expressApp).listen(process.env.PORT || 3000);
+  await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
