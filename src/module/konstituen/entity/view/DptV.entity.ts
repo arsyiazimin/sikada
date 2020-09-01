@@ -36,8 +36,23 @@ export class DptV {
     nama_kecamatan: string;
 
     @Column()
+    id_kecamatan: number;
+
+    @Column()
     nama_kelurahan: string;
 
     @Column()
+    id_kelurahan: number;
+
+    @Column()
     nama_tps: string;
+
+    @Column()
+    id_tps: number;
+
+    @Column()
+    nama_tim: string
+
+    @Column()
+    no_hp: string
 }

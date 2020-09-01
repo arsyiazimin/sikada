@@ -55,8 +55,17 @@ export class KelurahanService {
         }
     }
 
-    async getAllKelurahan() :Promise<Kelurahan[]>{
-        return await this.kelurahanRepo.find();
+    async getAllKelurahan(@Res() res) :Promise<Kelurahan[]>{
+        try {
+            const data = await this.kelurahanRepo.find();
+            return res
+                .status(HttpStatus.OK)
+                .json({ message: 'data found', response: data });
+        } catch (error) {
+            return res
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .json({ message: error });
+        }
     }
 
     async updateKelurahan(id:number, body:any, @Res() res):Promise<Kelurahan>{

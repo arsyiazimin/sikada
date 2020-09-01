@@ -18,7 +18,11 @@ export class SettingColumnService {
                 .where(`LOWER(set.type) = LOWER('${type}')`)
                 .getOne()
 
-            const dataSetting = await this.settingListRepo.findOne({ where: { user_id: user_id } })
+            // const dataSetting = await this.settingListRepo.findOne({ where: { user_id: user_id, type } })
+            const dataSetting = await getManager()
+                .createQueryBuilder(settingList, 'list')
+                .where(`list.user_id = ${user_id} AND LOWER(list.type) = LOWER('${type}')`)
+                .getOne()
 
             if (dataColumn) {
                 return res

@@ -7,4 +7,7 @@ export class TimPemenangan{
     
     @Column()
     nama_tim : string;
+
+    @Column()
+    status_id: number;
 }

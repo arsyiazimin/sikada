@@ -56,8 +56,17 @@ export class TpsService {
         }
     }
 
-    async getAllTps(): Promise<TpsEntity[]> {
-        return await this.tpsRepo.find();
+    async getAllTps(@Res() res): Promise<TpsEntity[]> {
+        try {
+            const data = await this.tpsRepo.find();
+            return res
+                .status(HttpStatus.OK)
+                .json({ message: 'data found', response: data });
+        } catch (error) {
+            return res
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .json({ message: error });
+        }
     }
 
     async updateTps(id: number, body: any, @Res() res): Promise<TpsEntity> {
@@ -81,7 +90,7 @@ export class TpsService {
             } else {
                 return res
                     .status(HttpStatus.OK)
-                    .json({ message: 'No data Found'});
+                    .json({ message: 'No data Found' });
             }
         } catch (error) {
             await queryRunner.rollbackTransaction();
@@ -93,7 +102,7 @@ export class TpsService {
             await queryRunner.release();
         }
     }
-    async deleteTps(id:number, @Res() res ): Promise<TpsEntity>{
+    async deleteTps(id: number, @Res() res): Promise<TpsEntity> {
         const connection = await getManager().connection;
         const queryRunner = await connection.createQueryRunner();
 
@@ -101,26 +110,26 @@ export class TpsService {
         try {
             const data = await this.tpsRepo.findOne(id);
 
-            if (data ){
+            if (data) {
                 await queryRunner.manager.remove(data).catch(async error => {
                     throw new Error(error);
                 });
                 await queryRunner.commitTransaction();
                 return res
                     .status(HttpStatus.OK)
-                    .json({message: 'Data Terhapus'});
-            } else{
+                    .json({ message: 'Data Terhapus' });
+            } else {
                 return res
                     .status(HttpStatus.OK)
-                    .json({message:'No data Found', response: data});
+                    .json({ message: 'No data Found', response: data });
             }
         } catch (error) {
             await queryRunner.rollbackTransaction();
-            return res  
+            return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({message:error});
+                .json({ message: error });
         }
-        finally{
+        finally {
             await queryRunner.release();
         }
     }
