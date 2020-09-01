@@ -19,8 +19,8 @@ export class KelurahanController {
     }
 
     @Get('getAll')
-    async getAllKelurahan():Promise<Kelurahan[]>{
-        return await this.kelService.getAllKelurahan();
+    async getAllKelurahan(@Res() res):Promise<Kelurahan[]>{
+        return await this.kelService.getAllKelurahan(res);
     }
 
     @Get('getOne/:id')

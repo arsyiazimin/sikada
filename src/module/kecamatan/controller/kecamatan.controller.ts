@@ -19,8 +19,8 @@ export class KecamatanController {
     }
 
     @Get('getAll')
-    async getAllKecamatan():Promise<Kecamatan[]>{
-        return await this.kecService.getAllKecamatan();
+    async getAllKecamatan(@Res() res):Promise<Kecamatan[]>{
+        return await this.kecService.getAllKecamatan(res);
     }
 
     @Get('getOne/:id')

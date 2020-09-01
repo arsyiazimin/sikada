@@ -20,8 +20,8 @@ export class TpsController {
     }
     
     @Get('getAll')
-    async getAllTps(): Promise<TpsEntity[]>{
-        return await this.tpsService.getAllTps();
+    async getAllTps(@Res() res): Promise<TpsEntity[]>{
+        return await this.tpsService.getAllTps(res);
     }
 
     @Get('getOne/:id')

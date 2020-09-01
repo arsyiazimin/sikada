@@ -38,4 +38,7 @@ export class Menu {
     @Column()
     CONDITION: string;
 
+    @Column()
+    ORDER: number;
+
 }

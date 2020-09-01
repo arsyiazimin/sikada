@@ -209,35 +209,71 @@ export class KonstituenService {
         }
     }
 
-    async updateKonstituen(id:number, body:any, @Res() res): Promise<DptEntity>{
+    async filterData(filterVal, @Res() res): Promise<DptV[]> {
+        try {
+            let where: any = ''
+            let where_array = []
+            console.log(filterVal)
+
+            if (filterVal.id_kecamatan !== null && filterVal.id_kecamatan.length !== 0) {
+                where = `v.id_kecamatan in (${filterVal.id_kecamatan.join(',')})`;
+                where_array.push(where)
+            }
+
+            if (filterVal.id_kelurahan !== null && filterVal.id_kelurahan.length !== 0) {
+                where = `v.id_kelurahan in (${filterVal.id_kelurahan.join(',')})`;
+                where_array.push(where)
+            }
+
+            if (filterVal.id_tps !== null && filterVal.id_tps.length !== 0) {
+                where = `v.id_tps in (${filterVal.id_tps.join(',')})`;
+                where_array.push(where)
+            }
+
+            const data = await getManager()
+                .createQueryBuilder(DptV, "v")
+                .where(where_array.join(' AND '))
+                .getMany()
+
+            return res
+                .status(HttpStatus.OK)
+                .json({ message: 'data found', response: data });
+        } catch (error) {
+            return res
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .json({ message: error });
+        }
+    }
+
+    async updateKonstituen(id: number, body: any, @Res() res): Promise<DptEntity> {
         const connection = await getManager().connection;
         const queryRunner = await connection.createQueryRunner();
 
         await queryRunner.startTransaction();
         try {
             const data = await this.dptRepo.findOne(id);
-            if (data){
+            if (data) {
                 const saveDpt = await this.dptRepo.create(body);
 
-                await queryRunner.manager.save(saveDpt).catch(async error =>{
+                await queryRunner.manager.save(saveDpt).catch(async error => {
                     throw new Error(error);
                 });
 
                 await queryRunner.commitTransaction();
                 return res
                     .status(HttpStatus.OK)
-                    .json({message:'Update Successfully'});
-            }else {
+                    .json({ message: 'Update Successfully' });
+            } else {
                 return res
                     .status(HttpStatus.OK)
-                    .json({ message: 'No data Found'});
+                    .json({ message: 'No data Found' });
             }
         } catch (error) {
             await queryRunner.rollbackTransaction();
             return res
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .json({ message: error});
-        } finally{
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .json({ message: error });
+        } finally {
             await queryRunner.release();
         }
     }
