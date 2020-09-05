@@ -10,6 +10,9 @@ export class Kecamatan {
     @Column()
     nama_kecamatan: string;
 
+    @Column()
+    status_id: number
+
     @OneToMany(type => DptEntity, dpt => dpt.KECAMATAN, { cascade: ['insert', 'update'], onDelete: 'CASCADE' })
     DPT: DptEntity[]
 

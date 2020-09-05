@@ -13,7 +13,7 @@ export class KecamatanController {
         private kecService : KecamatanService,
     ){}
 
-    @Post()
+    @Post('save')
     async createKecamatan(@Body() body, @Res () res):Promise<Kecamatan>{
         return await this.kecService.createKecamatan(body,res);
     }

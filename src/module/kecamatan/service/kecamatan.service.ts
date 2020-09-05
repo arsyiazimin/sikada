@@ -57,7 +57,7 @@ export class KecamatanService {
 
     async getAllKecamatan(@Res() res): Promise<Kecamatan[]> {
         try {
-            const data = await this.kecamatanRepo.find();
+            const data = await this.kecamatanRepo.find({ where: { status_id: 1 } });
             return res
                 .status(HttpStatus.OK)
                 .json({ message: 'data found', response: data });
