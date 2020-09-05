@@ -19,8 +19,8 @@ export class KelurahanController {
     }
 
     @Get('getAll')
-    async getAllKelurahan():Promise<Kelurahan[]>{
-        return await this.kelService.getAllKelurahan();
+    async getAllKelurahan(@Res() res):Promise<Kelurahan[]>{
+        return await this.kelService.getAllKelurahan(res);
     }
 
     @Get('getOne/:id')
@@ -36,5 +36,10 @@ export class KelurahanController {
     @Delete('delete/:id')
     async deleteKelurahan(@Param('id')id: number, @Res() res):Promise<Kelurahan>{
         return await this.kelService.deleteKelurahan(id,res);
+    }
+
+    @Get('kelurahanlist')
+    async kelurahanList(@Res() res ){
+        return await this.kelService.kelurahanList(res);
     }
 }

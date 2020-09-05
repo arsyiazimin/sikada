@@ -8,10 +8,13 @@ export class TimPemenangan{
     
     @Column()
     nama_tim : string;
+    
+    @Column()
+    status_id: number;
 
     @OneToMany(type=>DptEntity, dpt=>dpt.tim_dpt)
     dpt_tim:DptEntity
 
-    @OneToOne(type=>DptEntity, ketua_dpt=>ketua_dpt.ketua_tim)
+    @OneToOne(type=>DptEntity, ketua_dpt=>ketua_dpt.tim_dpt)
     dpt_ketua:DptEntity
 }

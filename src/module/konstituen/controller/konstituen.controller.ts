@@ -30,11 +30,16 @@ export class KonstituenController {
         return this.konstituenService.uploadData(file, res)
     }
 
-    @Put('update/:id')
-    async updateKonstituen(@Param('id')id:number, @Body() body, @Res() res ):Promise<DptEntity>{
-        return await this.konstituenService.updateKonstituen(id,body,res);
+    @Post('filterKonstituen')
+    async filter(@Body() body, @Res() res) {
+        return await this.konstituenService.filterData(body, res)
     }
-    
+
+    @Put('update/:id')
+    async updateKonstituen(@Param('id') id: number, @Body() body, @Res() res): Promise<DptEntity> {
+        return await this.konstituenService.updateKonstituen(id, body, res);
+    }
+
     @Get('getAllData')
     async getAllData(@Res() res) {
         return await this.konstituenService.getAllData(res)

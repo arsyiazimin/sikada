@@ -19,8 +19,8 @@ export class KecamatanController {
     }
 
     @Get('getAll')
-    async getAllKecamatan():Promise<Kecamatan[]>{
-        return await this.kecService.getAllKecamatan();
+    async getAllKecamatan(@Res() res):Promise<Kecamatan[]>{
+        return await this.kecService.getAllKecamatan(res);
     }
 
     @Get('getOne/:id')
@@ -36,5 +36,10 @@ export class KecamatanController {
     @Delete('delete/:id')
     async deleteKecamatan(@Param('id')id:number, @Res() res): Promise<Kecamatan>{
         return await this.kecService.deleteKecamatan(id,res);
+    }
+
+    @Get('kecamatanlist')
+    async kecamatan_list(@Res()res){
+        return await this.kecService.kecamatanList(res);
     }
 }

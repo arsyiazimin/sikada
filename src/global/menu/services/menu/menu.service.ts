@@ -11,7 +11,7 @@ export class MenuService {
     ) { }
 
     async getAllMenu(): Promise<Menu[]> {
-        return await this.menuRepo.find();
+        return await this.menuRepo.find({ order: { ORDER: 'ASC' } });
     }
 
     async addBookmark(menu_id: number, data: any): Promise<Menu[]> {

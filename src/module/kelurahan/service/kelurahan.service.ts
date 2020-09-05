@@ -3,11 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Kelurahan } from '../../../module/konstituen/entity/kelurahan.entity';
 import { Repository, getManager } from 'typeorm';
 import { async } from 'rxjs';
+import { KelurahanListEntity } from 'module/konstituen/entity/view/kelurahan-list.entity';
 
 @Injectable()
 export class KelurahanService {
     constructor(
-        @InjectRepository(Kelurahan) private readonly kelurahanRepo: Repository<Kelurahan>
+        @InjectRepository(Kelurahan) private readonly kelurahanRepo: Repository<Kelurahan>,
+        @InjectRepository(KelurahanListEntity) private readonly kelurahanListRepo: Repository<KelurahanListEntity>
+
     ){}
 
     async createKelurahan(body:any, @Res() res): Promise<Kelurahan>{
@@ -55,8 +58,17 @@ export class KelurahanService {
         }
     }
 
-    async getAllKelurahan() :Promise<Kelurahan[]>{
-        return await this.kelurahanRepo.find();
+    async getAllKelurahan(@Res() res) :Promise<Kelurahan[]>{
+        try {
+            const data = await this.kelurahanRepo.find();
+            return res
+                .status(HttpStatus.OK)
+                .json({ message: 'data found', response: data });
+        } catch (error) {
+            return res
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .json({ message: error });
+        }
     }
 
     async updateKelurahan(id:number, body:any, @Res() res):Promise<Kelurahan>{
@@ -118,6 +130,19 @@ export class KelurahanService {
                 .json({message:error});
         }finally {
             await queryRunner.release();
+        }
+    }
+
+    async kelurahanList(@Res() res){
+        try {
+            const data = await this.kelurahanListRepo.find();
+            return res
+                .status(HttpStatus.OK)
+                .json({ message: 'data found', response: data });
+        } catch (error) {
+            return res
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .json({ message: error });
         }
     }
 }
