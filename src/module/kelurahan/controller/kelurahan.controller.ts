@@ -37,4 +37,9 @@ export class KelurahanController {
     async deleteKelurahan(@Param('id')id: number, @Res() res):Promise<Kelurahan>{
         return await this.kelService.deleteKelurahan(id,res);
     }
+
+    @Get('kelurahanlist')
+    async kelurahanList(@Res() res ){
+        return await this.kelService.kelurahanList(res);
+    }
 }

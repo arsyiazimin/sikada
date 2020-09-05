@@ -18,6 +18,7 @@ import { KelurahanModule } from './module/kelurahan/kelurahan.module';
 import { KecamatanModule } from './module/kecamatan/kecamatan.module';
 import { TimPemenanganModule } from './module/tim-pemenangan/tim-pemenangan.module';
 import { Connection } from 'typeorm';
+import { RealcountModule } from './module/realcount/realcount.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { Connection } from 'typeorm';
     KelurahanModule,
     KecamatanModule,
     TimPemenanganModule,
+    RealcountModule,
   ]
 })
 export class AppModule implements NestModule {

@@ -1,5 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne } from "typeorm";
 import { Kecamatan } from "./kecamatan.entity";
+import { TimPemenangan } from "./tim-pemenangan.entity";
+import { KecamatanListEntity } from "./view/kecamatan-list.entity";
+import { KelurahanListEntity } from "./view/kelurahan-list.entity";
 
 @Entity('m_dpt')
 export class DptEntity {
@@ -60,4 +63,8 @@ export class DptEntity {
     @ManyToOne(type => Kecamatan, kec => kec.DPT, { cascade: true, onDelete: 'CASCADE' })
     @JoinColumn({ name: 'id_kecamatan' })
     KECAMATAN: Kecamatan
+
+    @ManyToOne(type=>TimPemenangan, tim=>tim.dpt_tim, { cascade: true, onDelete: 'CASCADE' })
+    tim_dpt:TimPemenangan
+
 }
