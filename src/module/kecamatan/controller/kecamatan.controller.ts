@@ -13,7 +13,7 @@ export class KecamatanController {
         private kecService : KecamatanService,
     ){}
 
-    @Post()
+    @Post('save')
     async createKecamatan(@Body() body, @Res () res):Promise<Kecamatan>{
         return await this.kecService.createKecamatan(body,res);
     }
@@ -36,5 +36,10 @@ export class KecamatanController {
     @Delete('delete/:id')
     async deleteKecamatan(@Param('id')id:number, @Res() res): Promise<Kecamatan>{
         return await this.kecService.deleteKecamatan(id,res);
+    }
+
+    @Get('kecamatanlist')
+    async kecamatan_list(@Res()res){
+        return await this.kecService.kecamatanList(res);
     }
 }

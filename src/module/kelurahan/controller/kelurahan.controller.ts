@@ -13,7 +13,7 @@ export class KelurahanController {
         private kelService : KelurahanService
     ){}
 
-    @Post()
+    @Post('save')
     async createKelurahan(@Body()body, @Res() res):Promise<Kelurahan>{
         return await this.kelService.createKelurahan(body,res);
     }
@@ -36,5 +36,10 @@ export class KelurahanController {
     @Delete('delete/:id')
     async deleteKelurahan(@Param('id')id: number, @Res() res):Promise<Kelurahan>{
         return await this.kelService.deleteKelurahan(id,res);
+    }
+
+    @Get('kelurahanlist')
+    async kelurahanList(@Res() res ){
+        return await this.kelService.kelurahanList(res);
     }
 }

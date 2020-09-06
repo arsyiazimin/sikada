@@ -3,11 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Kecamatan } from '../../../module/konstituen/entity/kecamatan.entity';
 import { Repository, getManager } from 'typeorm';
 import { async } from 'rxjs';
+import { KecamatanListEntity } from 'module/konstituen/entity/view/kecamatan-list.entity';
 
 @Injectable()
 export class KecamatanService {
     constructor(
         @InjectRepository(Kecamatan) private readonly kecamatanRepo: Repository<Kecamatan>
+        //@InjectRepository(KecamatanListEntity) private readonly kecamatanListRepo: Repository<KecamatanListEntity>
+
     ) { }
 
     async createKecamatan(body: any, @Res() res): Promise<Kecamatan> {
@@ -57,7 +60,7 @@ export class KecamatanService {
 
     async getAllKecamatan(@Res() res): Promise<Kecamatan[]> {
         try {
-            const data = await this.kecamatanRepo.find();
+            const data = await this.kecamatanRepo.find({ where: { status_id: 1 } });
             return res
                 .status(HttpStatus.OK)
                 .json({ message: 'data found', response: data });
@@ -131,6 +134,21 @@ export class KecamatanService {
                 .json({ message: error });
         } finally {
             await queryRunner.release();
+        }
+    }
+
+    async kecamatanList(@Res() res) {
+        try {
+            const data = await getManager()
+                .createQueryBuilder(KecamatanListEntity, "kec_list")
+                .getMany();
+            return res
+                .status(HttpStatus.OK)
+                .json({ message: 'data found', response: data });
+        } catch (error) {
+            return res
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .json({ message: error })
         }
     }
 }

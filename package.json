@@ -33,6 +33,7 @@
     "accounting": "^0.4.1",
     "automapper-ts": "^1.9.0",
     "bcrypt": "^4.0.1",
+    "capitalize": "^2.0.3",
     "cls-hooked": "^4.2.2",
     "config": "^3.3.1",
     "copy": "^0.3.2",

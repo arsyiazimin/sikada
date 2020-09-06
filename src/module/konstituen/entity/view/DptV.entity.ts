@@ -55,4 +55,7 @@ export class DptV {
 
     @Column()
     no_hp: string
+
+    @Column()
+    id_tim: number
 }
