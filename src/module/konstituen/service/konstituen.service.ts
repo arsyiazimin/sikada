@@ -18,6 +18,7 @@ const Path = require('path');
 const Fs = require('fs');
 import { RequestContext } from '../../../common/subscriber/RequestContext';
 import { DptV } from '../entity/view/DptV.entity';
+var capitalize = require('capitalize')
 
 @Injectable()
 export class KonstituenService {
@@ -49,7 +50,7 @@ export class KonstituenService {
                     if (resFile) {
                         // this.saveDate(resFile.filename)
                         let data;
-                        const pathprefix = Path.resolve(__dirname, '../../../file/' + moment(new Date()).format('YYYY') + '/data-konstituen/');
+                        const pathprefix = Path.resolve(this.__path, 'file/' + moment(new Date()).format('YYYY') + '/data-konstituen/');
                         let folder = 'file/' + moment(new Date()).format('YYYY') + '/data-konstituen/'
                         // let filename = 'Summary-';
                         let prefixname = resFile.filename;
@@ -114,12 +115,14 @@ export class KonstituenService {
                             for (let index = 0; index < insertdata.length; index++) {
                                 let data = {
                                     ...insertdata[index],
+                                    nama: capitalize.words(insertdata[index].nama),
                                     id_kecamatan: kecamatan.id_kecamatan,
                                     id_kelurahan: kecamatan['KEL'].id_kelurahan,
                                     id_tps: kecamatan['KEL']['TPS'].id_tps,
                                     create_id: RequestContext.currentUser().login_id,
                                     create_date: new Date()
                                 }
+                                // console.log(data)
                                 let dataExisting = await this.dptRepo.findOne({ where: { no_kk: insertdata[index].no_kk, nik: insertdata[index].nik } })
                                 if (dataExisting) {
                                     throw new Error(`No KK : ${dataExisting.no_kk} dengan NIK : ${dataExisting.nik} Sudah ada`);
@@ -142,6 +145,7 @@ export class KonstituenService {
                 })
 
                 await queryRunner.commitTransaction();
+                // await queryRunner.rollbackTransaction();
                 return res
                     .status(HttpStatus.OK)
                     .json({ message: 'Save Successfully' });
@@ -230,6 +234,21 @@ export class KonstituenService {
                 where_array.push(where)
             }
 
+            if (filterVal.id_tim !== null) {
+                where = `v.id_tim in (${filterVal.id_tim})`;
+                where_array.push(where)
+            }
+            
+            if (filterVal.nik !== null && filterVal.nik !== '') {
+                where = `LOWER(v.nik) like LOWER('%${filterVal.nik}%')`;
+                where_array.push(where)
+            }
+
+            if (filterVal.nama !== null && filterVal.nama !== '') {
+                where = `LOWER(v.nama) like LOWER('%${filterVal.nama}%')`;
+                where_array.push(where)
+            }
+
             const data = await getManager()
                 .createQueryBuilder(DptV, "v")
                 .where(where_array.join(' AND '))
@@ -253,12 +272,16 @@ export class KonstituenService {
         try {
             const data = await this.dptRepo.findOne(id);
             if (data) {
+                console.log(body)
+                console.log(data)
                 const saveDpt = await this.dptRepo.create(body);
-
+                console.log(saveDpt)
                 await queryRunner.manager.save(saveDpt).catch(async error => {
                     throw new Error(error);
                 });
+                console.log(saveDpt)
 
+                // await queryRunner.rollbackTransaction();
                 await queryRunner.commitTransaction();
                 return res
                     .status(HttpStatus.OK)
@@ -272,7 +295,7 @@ export class KonstituenService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         } finally {
             await queryRunner.release();
         }

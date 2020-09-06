@@ -13,7 +13,7 @@ export class KelurahanController {
         private kelService : KelurahanService
     ){}
 
-    @Post()
+    @Post('save')
     async createKelurahan(@Body()body, @Res() res):Promise<Kelurahan>{
         return await this.kelService.createKelurahan(body,res);
     }

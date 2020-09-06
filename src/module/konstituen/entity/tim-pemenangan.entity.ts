@@ -2,19 +2,25 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne } from "typ
 import { DptEntity } from "./dpt.entity";
 
 @Entity('m_tim')
-export class TimPemenangan{
+export class TimPemenangan {
     @PrimaryGeneratedColumn()
-    id_tim : number;
-    
+    id_tim: number;
+
     @Column()
-    nama_tim : string;
-    
+    nama_tim: string;
+
+    @Column()
+    nama_ketua: string;
+
     @Column()
     status_id: number;
 
-    @OneToMany(type=>DptEntity, dpt=>dpt.tim_dpt)
-    dpt_tim:DptEntity
+    @Column()
+    deskripsi: string;
 
-    @OneToOne(type=>DptEntity, ketua_dpt=>ketua_dpt.tim_dpt)
-    dpt_ketua:DptEntity
+    // @OneToMany(type => DptEntity, dpt => dpt.tim_dpt)
+    // DPT: DptEntity
+
+    // @OneToOne(type => DptEntity, ketua_dpt => ketua_dpt.tim_dpt)
+    // ketua_tim: DptEntity
 }

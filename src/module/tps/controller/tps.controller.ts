@@ -14,7 +14,7 @@ export class TpsController {
     ){}
 
     
-    @Post()
+    @Post('save')
     async createTps(@Body() body, @Res() res ) : Promise<TpsEntity>{
         return await this.tpsService.createTps(body,res);
     }

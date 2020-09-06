@@ -14,4 +14,7 @@ export class KecamatanListEntity {
     @Column()
     jumlah_dpt: number;
 
+    @Column()
+    status_id: number
+
 }

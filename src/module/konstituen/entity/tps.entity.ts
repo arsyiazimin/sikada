@@ -10,6 +10,9 @@ export class TpsEntity {
     @Column()
     nama_tps: string;
 
+    @Column()
+    status_id: number;
+
     @OneToMany(type => tKelTps, t => t.TPS, { cascade: ['insert', 'update'], onDelete: 'CASCADE' })
     T_KEL_TPS: tKelTps[]
 }

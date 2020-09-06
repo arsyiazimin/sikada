@@ -60,11 +60,20 @@ export class DptEntity {
     @Column()
     update_date: Date;
 
+    @Column()
+    ketua_bit: number
+
+    @Column()
+    anggota_bit: number
+
     @ManyToOne(type => Kecamatan, kec => kec.DPT, { cascade: true, onDelete: 'CASCADE' })
     @JoinColumn({ name: 'id_kecamatan' })
     KECAMATAN: Kecamatan
 
-    @ManyToOne(type=>TimPemenangan, tim=>tim.dpt_tim, { cascade: true, onDelete: 'CASCADE' })
-    tim_dpt:TimPemenangan
+    // @ManyToOne(type => TimPemenangan, tim => tim.DPT, { cascade: true, onDelete: 'CASCADE' })
+    // tim_dpt: TimPemenangan
+
+    // @ManyToOne(type => TimPemenangan, tim => tim.DPT, { cascade: true, onDelete: 'CASCADE' })
+    // ketua_tim: TimPemenangan
 
 }

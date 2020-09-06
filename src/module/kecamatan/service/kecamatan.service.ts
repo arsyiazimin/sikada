@@ -137,18 +137,18 @@ export class KecamatanService {
         }
     }
 
-    async kecamatanList(@Res()res){
+    async kecamatanList(@Res() res) {
         try {
             const data = await getManager()
-                .createQueryBuilder(KecamatanListEntity,"kec_list")
+                .createQueryBuilder(KecamatanListEntity, "kec_list")
                 .getMany();
             return res
                 .status(HttpStatus.OK)
-                .json({message: 'data found', response: data});
+                .json({ message: 'data found', response: data });
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({message:error})
+                .json({ message: error })
         }
     }
 }
