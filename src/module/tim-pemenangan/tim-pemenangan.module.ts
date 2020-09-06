@@ -4,7 +4,7 @@ import { TimPemenanganService } from './service/tim-pemenangan.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TimPemenangan } from '../../module/konstituen/entity/tim-pemenangan.entity';
 import { timList } from './entity/timList.entity';
-import { DptEntity } from 'module/konstituen/entity/dpt.entity';
+import { DptEntity } from '../../module/konstituen/entity/dpt.entity';
 
 
 

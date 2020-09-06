@@ -1,6 +1,6 @@
 import { Controller, Get, Res } from '@nestjs/common';
 import { RealcountService } from '../service/realcount.service';
-import { DptV } from 'module/konstituen/entity/view/DptV.entity';
+import { DptV } from '../../../module/konstituen/entity/view/DptV.entity';
 
 @Controller('realcount')
 export class RealcountController {

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Kecamatan } from '../../../module/konstituen/entity/kecamatan.entity';
 import { Repository, getManager } from 'typeorm';
 import { async } from 'rxjs';
-import { KecamatanListEntity } from 'module/konstituen/entity/view/kecamatan-list.entity';
+import { KecamatanListEntity } from '../../../module/konstituen/entity/view/kecamatan-list.entity';
 
 @Injectable()
 export class KecamatanService {
@@ -32,7 +32,7 @@ export class KecamatanService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         } finally {
             await queryRunner.release();
         }
@@ -54,7 +54,7 @@ export class KecamatanService {
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         }
     }
 
@@ -67,7 +67,7 @@ export class KecamatanService {
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         }
     }
 
@@ -99,7 +99,7 @@ export class KecamatanService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         } finally {
             await queryRunner.release();
         }
@@ -131,7 +131,7 @@ export class KecamatanService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         } finally {
             await queryRunner.release();
         }
@@ -148,7 +148,7 @@ export class KecamatanService {
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error })
+                .json({ message: error.message })
         }
     }
 }

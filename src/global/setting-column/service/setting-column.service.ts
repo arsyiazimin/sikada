@@ -36,7 +36,7 @@ export class SettingColumnService {
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error, response: error });
+                .json({ message: error.message, response: error });
         }
     }
 
@@ -60,7 +60,7 @@ export class SettingColumnService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error.message });
+                .json({ message: error.message.message });
         } finally {
             await queryRunner.release();
         }

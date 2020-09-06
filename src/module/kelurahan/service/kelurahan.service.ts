@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Kelurahan } from '../../../module/konstituen/entity/kelurahan.entity';
 import { Repository, getManager } from 'typeorm';
 import { async } from 'rxjs';
-import { KelurahanListEntity } from 'module/konstituen/entity/view/kelurahan-list.entity';
-import { tKelTps } from 'module/konstituen/entity/tpKel.entity';
+import { KelurahanListEntity } from '../../../module/konstituen/entity/view/kelurahan-list.entity';
+import { tKelTps } from '../../../module/konstituen/entity/tpKel.entity';
 
 @Injectable()
 export class KelurahanService {
@@ -33,7 +33,7 @@ export class KelurahanService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.OK)
-                .json({ message: error });
+                .json({ message: error.message });
         } finally {
             await queryRunner.release();
         }
@@ -55,7 +55,7 @@ export class KelurahanService {
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         }
     }
 
@@ -68,7 +68,7 @@ export class KelurahanService {
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         }
     }
 
@@ -108,7 +108,7 @@ export class KelurahanService {
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         } finally {
             await queryRunner.release();
         }
@@ -139,7 +139,7 @@ export class KelurahanService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         } finally {
             await queryRunner.release();
         }
@@ -154,7 +154,7 @@ export class KelurahanService {
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         }
     }
 }

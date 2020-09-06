@@ -18,7 +18,7 @@ const Path = require('path');
 const Fs = require('fs');
 import { RequestContext } from '../../../common/subscriber/RequestContext';
 import { DptV } from '../entity/view/DptV.entity';
-var capitalize = require('capitalize')
+const capitalize = require('capitalize')
 
 @Injectable()
 export class KonstituenService {
@@ -159,7 +159,7 @@ export class KonstituenService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error.message });
+                .json({ message: error.message.message });
         } finally {
             await queryRunner.release();
         }
@@ -209,7 +209,7 @@ export class KonstituenService {
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         }
     }
 
@@ -260,7 +260,7 @@ export class KonstituenService {
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         }
     }
 
@@ -295,7 +295,7 @@ export class KonstituenService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error.message });
+                .json({ message: error.message.message });
         } finally {
             await queryRunner.release();
         }

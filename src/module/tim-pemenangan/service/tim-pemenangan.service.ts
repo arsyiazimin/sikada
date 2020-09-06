@@ -3,7 +3,7 @@ import { TimPemenangan } from '../../../module/konstituen/entity/tim-pemenangan.
 import { Repository, getManager } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { timList } from '../entity/timList.entity';
-import { DptEntity } from 'module/konstituen/entity/dpt.entity';
+import { DptEntity } from '../../../module/konstituen/entity/dpt.entity';
 
 @Injectable()
 export class TimPemenanganService {
@@ -33,7 +33,7 @@ export class TimPemenanganService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error.message });
+                .json({ message: error.message.message });
         } finally {
             await queryRunner.release();
         }
@@ -55,7 +55,7 @@ export class TimPemenanganService {
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         }
     }
 
@@ -72,7 +72,7 @@ export class TimPemenanganService {
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         }
     }
 
@@ -128,7 +128,7 @@ export class TimPemenanganService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error.message });
+                .json({ message: error.message.message });
         } finally {
             await queryRunner.release();
         }
@@ -160,7 +160,7 @@ export class TimPemenanganService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         } finally {
             await queryRunner.release();
         }
