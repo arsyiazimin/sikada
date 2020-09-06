@@ -5,17 +5,24 @@ import { tKelTps } from "../tpKel.entity";
 @Entity('kelurahan_list')
 export class KelurahanListEntity {
     @PrimaryGeneratedColumn()
-    id_kelurahan:string;
-    @Column()
-    nama_kecamatan:string;
+    id_kelurahan: string;
 
     @Column()
-    nama_kelurahan:string;
+    nama_kecamatan: string;
 
     @Column()
-    jumlah_tps :number;
+    nama_kelurahan: string;
+
+    @Column()
+    jumlah_tps: number;
 
     @Column()
     jumlah_dpt: number;
-    
+
+    @Column()
+    status_id: number
+
+    @Column()
+    id_kecamatan: number
+
 }

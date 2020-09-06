@@ -60,7 +60,7 @@ export class KecamatanService {
 
     async getAllKecamatan(@Res() res): Promise<Kecamatan[]> {
         try {
-            const data = await this.kecamatanRepo.find();
+            const data = await this.kecamatanRepo.find({ where: { status_id: 1 } });
             return res
                 .status(HttpStatus.OK)
                 .json({ message: 'data found', response: data });
@@ -137,18 +137,18 @@ export class KecamatanService {
         }
     }
 
-    async kecamatanList(@Res()res){
+    async kecamatanList(@Res() res) {
         try {
             const data = await getManager()
-                .createQueryBuilder(KecamatanListEntity,"kec_list")
+                .createQueryBuilder(KecamatanListEntity, "kec_list")
                 .getMany();
             return res
                 .status(HttpStatus.OK)
-                .json({message: 'data found', response: data});
+                .json({ message: 'data found', response: data });
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({message:error})
+                .json({ message: error })
         }
     }
 }
