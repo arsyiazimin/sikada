@@ -11,7 +11,7 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 06/09/2020 21:43:39
+ Date: 13/09/2020 22:07:55
 */
 
 SET NAMES utf8mb4;
@@ -63,7 +63,7 @@ INSERT INTO `m_dpt` VALUES (410, '7303010107******', '7303013112******', 'Gajang
 INSERT INTO `m_dpt` VALUES (411, '7303010202******', '7303010407******', 'Muh. Rhedza', 'Bantaeng', '04|07|****', 'L', NULL, 'Jl. T.A Gani', 3, 1, 1, 3, 5, 1, '2020-08-16 15:52:42', NULL, NULL, 1, 3, 0, 0);
 INSERT INTO `m_dpt` VALUES (412, '7303010107******', '7303015306******', 'Masi', 'Pundingin', '13|06|****', 'P', NULL, 'Pundingin', 2, 1, 1, 4, 5, 1, '2020-08-16 15:52:42', NULL, NULL, 1, NULL, 0, 0);
 INSERT INTO `m_dpt` VALUES (413, '7303010202******', '7303015503******', 'Irma Erfiana Malik', 'Bantaeng', '25|03|****', 'P', NULL, 'Jl.T.A.Gani', 3, 1, 1, 3, 5, 1, '2020-08-16 15:52:42', NULL, NULL, 1, NULL, 0, 0);
-INSERT INTO `m_dpt` VALUES (414, '7303010107******', '7303017112******', 'Nuraeni', 'Bantaeng', '31|12|****', 'P', NULL, 'Pundingin', 2, 1, 1, 4, 5, 1, '2020-08-16 15:52:42', NULL, NULL, 1, NULL, 0, 0);
+INSERT INTO `m_dpt` VALUES (414, '7303010107******', '7303017112******', 'Nuraeni', 'Bantaeng', '31|12|****', 'P', NULL, 'Pundingin', 2, 1, 1, 4, 5, 1, '2020-08-16 15:52:42', NULL, NULL, 1, 3, 0, 0);
 INSERT INTO `m_dpt` VALUES (415, '7303010204******', '7303010407******', 'Harding', 'Bantaeng', '04|07|****', 'L', NULL, 'Jl T A Gani', 1, 1, 1, 3, 5, 1, '2020-08-16 15:52:42', NULL, NULL, 1, 4, 0, 0);
 INSERT INTO `m_dpt` VALUES (416, '7303010107******', '7303011207******', 'Baso', 'Bantaeng', '12|07|****', 'L', NULL, 'Pundingin Ii', 0, 2, 1, 4, 5, 1, '2020-08-16 15:52:42', NULL, NULL, 1, NULL, 0, 0);
 INSERT INTO `m_dpt` VALUES (417, '7303010204******', '7303015502******', 'Nurhayati Salam', 'Bantaeng', '15|02|****', 'P', NULL, 'Jl T A Gani', 1, 1, 1, 3, 5, 1, '2020-08-16 15:52:42', NULL, NULL, 1, 4, 0, 0);
@@ -72,10 +72,10 @@ INSERT INTO `m_dpt` VALUES (419, '7303010210******', '7303010205******', 'Hasrul
 INSERT INTO `m_dpt` VALUES (420, '7303010107******', '7303010705******', 'Bahyu', 'Bantaeng', '07|05|****', 'L', NULL, 'Pundingin', 2, 1, 1, 4, 5, 1, '2020-08-16 15:52:42', NULL, NULL, 1, NULL, 0, 0);
 INSERT INTO `m_dpt` VALUES (421, '7303010210******', '7303012002******', 'Haerul Irham', 'Polmas', '20|02|****', 'L', NULL, 'Jl T A Gani', 4, 1, 1, 3, 5, 1, '2020-08-16 15:52:42', NULL, NULL, 1, NULL, 0, 0);
 INSERT INTO `m_dpt` VALUES (422, '7303010107******', '7303015008******', 'Sumarni', 'Bantaeng', '10|08|****', 'P', NULL, 'Pundingin', 2, 1, 1, 4, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
-INSERT INTO `m_dpt` VALUES (423, '7303010210******', '7303014302******', 'Kamisa', 'Bantaeng', '03|02|****', 'P', NULL, 'Jl T A Gani', 4, 1, 1, 3, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, 4, 0, 0);
+INSERT INTO `m_dpt` VALUES (423, '7303010210******', '7303014302******', 'Kamisa', 'Bantaeng', '03|02|****', 'P', NULL, 'Jl T A Gani', 4, 1, 1, 3, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, 3, 0, 0);
 INSERT INTO `m_dpt` VALUES (424, '7303010107******', '7303015207******', 'Alla', 'Bantaeng', '12|07|****', 'P', NULL, 'Pundingin', 2, 1, 1, 4, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
 INSERT INTO `m_dpt` VALUES (425, '7303010212******', '7303011701******', 'Sul Resky Ananda', 'Kendari', '17|01|****', 'L', NULL, 'Kompleks Terminal Baru', 1, 1, 1, 3, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
-INSERT INTO `m_dpt` VALUES (426, '7303010107******', '7303011102******', 'H Raeni', 'Bantaeng', '11|02|****', 'L', NULL, 'Pundingin', 2, 1, 1, 4, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
+INSERT INTO `m_dpt` VALUES (426, '7303010107******', '7303011102******', 'H Raeni', 'Bantaeng', '11|02|****', 'L', NULL, 'Pundingin', 2, 1, 1, 4, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, 3, 0, 0);
 INSERT INTO `m_dpt` VALUES (427, '7303010212******', '7303012707******', 'Adrian Arsyad', 'Bantaeng', '27|07|****', 'L', NULL, 'Kompleks Terminal Baru', 1, 1, 1, 3, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
 INSERT INTO `m_dpt` VALUES (428, '7303010107******', '7303011210******', 'Ardiansyah', 'Bantaeng', '12|10|****', 'L', NULL, 'Pundingin', 2, 0, 1, 4, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
 INSERT INTO `m_dpt` VALUES (429, '7303010308******', '7303010204******', 'Takdir Naipon', 'Bantaeng', '28|04|****', 'L', NULL, 'Jl. T. A. Gani', 4, 1, 1, 3, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
@@ -83,12 +83,12 @@ INSERT INTO `m_dpt` VALUES (430, '7303010107******', '7303017112******', 'Hj Bau
 INSERT INTO `m_dpt` VALUES (431, '7303010308******', '7303011108******', 'Abdul Malik Naipon', 'Sanana', '11|08|****', 'L', NULL, 'Jl T A Gani', 3, 1, 1, 3, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
 INSERT INTO `m_dpt` VALUES (432, '7303010207******', '7303013112******', 'Mustafa', 'Bantaeng', '31|12|****', 'L', NULL, 'Pundingin', 2, 1, 1, 4, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
 INSERT INTO `m_dpt` VALUES (433, '7303010308******', '7303012909******', 'Taufik Naipon', 'Bantaeng', '29|09|****', 'L', NULL, 'Jl T A Gani', 3, 1, 1, 3, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
-INSERT INTO `m_dpt` VALUES (434, '7303010207******', '7303017112******', 'Rasia', 'Bantaeng', '31|12|****', 'P', NULL, 'Pundingin', 2, 1, 1, 4, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
+INSERT INTO `m_dpt` VALUES (434, '7303010207******', '7303017112******', 'Rasia', 'Bantaeng', '31|12|****', 'P', NULL, 'Pundingin', 2, 1, 1, 4, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, 4, 0, 0);
 INSERT INTO `m_dpt` VALUES (435, '7303010308******', '7303013005******', 'Takmil Naipon', 'Bantaeng', '30|05|****', 'L', NULL, 'Jl T A Gani', 3, 1, 1, 3, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, 3, 0, 0);
 INSERT INTO `m_dpt` VALUES (436, '7303010308******', '7303012505******', 'Kamaruddin', 'Bantaeng', '25|05|****', 'L', NULL, 'Pundingin', 2, 0, 1, 4, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
-INSERT INTO `m_dpt` VALUES (437, '7303010308******', '7303016104******', 'Rafika Naipon', 'Bantaeng', '21|04|****', 'P', NULL, 'Jl T A Gani', 3, 1, 1, 3, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, 4, 0, 0);
+INSERT INTO `m_dpt` VALUES (437, '7303010308******', '7303016104******', 'Rafika Naipon', 'Bantaeng', '21|04|****', 'P', NULL, 'Jl T A Gani', 3, 1, 1, 3, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
 INSERT INTO `m_dpt` VALUES (438, '7303010308******', '7303015505******', 'Suriana', 'Bantaeng', '15|05|****', 'P', NULL, 'Pundingin', 2, 0, 1, 4, 5, 1, '2020-08-16 15:52:43', NULL, NULL, 1, NULL, 0, 0);
-INSERT INTO `m_dpt` VALUES (439, '7303010308******', '7303016607******', 'Ervina Malik', 'Bantaeng', '26|07|****', 'P', NULL, 'Jl T A Gani', 3, 1, 1, 3, 5, 1, '2020-08-16 15:52:44', NULL, NULL, 1, 4, 0, 0);
+INSERT INTO `m_dpt` VALUES (439, '7303010308******', '7303016607******', 'Ervina Malik', 'Bantaeng', '26|07|****', 'P', NULL, 'Jl T A Gani', 3, 1, 1, 3, 5, 1, '2020-08-16 15:52:44', NULL, NULL, 1, NULL, 0, 0);
 INSERT INTO `m_dpt` VALUES (440, '7303010308******', '7303016505******', 'Hamsiah', 'Bantaeng', '25|05|****', 'P', NULL, 'Pundingin Ii', 0, 2, 1, 4, 5, 1, '2020-08-16 15:52:44', NULL, NULL, 1, NULL, 0, 0);
 INSERT INTO `m_dpt` VALUES (441, '7303010308******', '7303017112******', 'Aisyah', 'Bantaeng', '31|12|****', 'P', NULL, 'Jl T A Gani', 3, 1, 1, 3, 5, 1, '2020-08-16 15:52:44', NULL, NULL, 1, 4, 0, 0);
 INSERT INTO `m_dpt` VALUES (442, '7303010308******', '7303012304******', 'Fajar Nur', 'Bantaeng', '23|04|****', 'L', NULL, 'Pundingin Ii', 0, 2, 1, 4, 5, 1, '2020-08-16 15:52:44', NULL, NULL, 1, NULL, 0, 0);
@@ -216,12 +216,12 @@ CREATE TABLE `m_setting_column`  (
 -- ----------------------------
 -- Records of m_setting_column
 -- ----------------------------
-INSERT INTO `m_setting_column` VALUES (1, 'konstituen-list', 'no_kk,nik,nama,tempat_lahir,tanggal_lahir,jenis_kelamin,alamat,rt,rw,nama_kecamatan,nama_kelurahan,nama_tps,nama_tim,no_hp', '', 'id_dpt, id_kecamatan, id_kelurahan, id_tps', NULL, NULL);
+INSERT INTO `m_setting_column` VALUES (1, 'konstituen-list', 'no_kk,nik,nama,tempat_lahir,tanggal_lahir,jenis_kelamin,alamat,rt,rw,nama_kecamatan,nama_kelurahan,nama_tps,nama_tim,no_hp', '', 'id_dpt, id_kecamatan, id_kelurahan, id_tps,id_tim', NULL, NULL);
 INSERT INTO `m_setting_column` VALUES (2, 'kecamatan', 'nama_kecamatan, jumlah_dpt', NULL, 'id_kecamatan, status_id', NULL, NULL);
 INSERT INTO `m_setting_column` VALUES (3, 'kelurahan', 'nama_kelurahan, nama_kecamatan, jumlah_tps, jumlah_dpt', NULL, 'id_kelurahan, status_id', NULL, NULL);
 INSERT INTO `m_setting_column` VALUES (4, 'tps', 'nama_tps', NULL, 'id_tps,status_id', NULL, NULL);
-INSERT INTO `m_setting_column` VALUES (5, 'tim', 'nama_tim,nama_ketua,deskripsi', '', 'id_tim,status_id', NULL, NULL);
-INSERT INTO `m_setting_column` VALUES (6, 'konstituen-edit', 'no_kk,nik,nama,tempat_lahir,tanggal_lahir,jenis_kelamin,alamat,rt,rw,nama_kecamatan,nama_kelurahan,nama_tps,nama_tim,no_hp', '', 'id_dpt, id_kecamatan, id_kelurahan, id_tps', NULL, NULL);
+INSERT INTO `m_setting_column` VALUES (5, 'tim', 'nama_tim,nama_ketua,deskripsi,konstituen', '', 'id_tim,status_id', NULL, NULL);
+INSERT INTO `m_setting_column` VALUES (6, 'konstituen-edit', 'no_kk,nik,nama,tempat_lahir,tanggal_lahir,jenis_kelamin,alamat,rt,rw,nama_kecamatan,nama_kelurahan,nama_tps,nama_tim,no_hp', '', 'id_dpt, id_kecamatan, id_kelurahan, id_tps,id_tim', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for m_tim
@@ -350,11 +350,10 @@ CREATE TABLE `t_setting_list`  (
 -- ----------------------------
 -- Records of t_setting_list
 -- ----------------------------
-INSERT INTO `t_setting_list` VALUES (4, 'konstituen-list', 1, '{\"field\":\"nik\",\"order\":1};;{\"field\":\"nama\",\"order\":2};;{\"field\":\"nama_tim\",\"order\":3};;{\"field\":\"nama_kecamatan\",\"order\":4};;{\"field\":\"nama_kelurahan\",\"order\":5};;{\"field\":\"nama_tps\",\"order\":6};;{\"field\":\"no_hp\",\"order\":7}', '2020-08-17 03:14:31', '2020-09-01 20:35:32');
+INSERT INTO `t_setting_list` VALUES (4, 'konstituen-list', 1, '{\"field\":\"nik\",\"order\":1};;{\"field\":\"nama\",\"order\":2};;{\"field\":\"nama_tim\",\"order\":3};;{\"field\":\"nama_kecamatan\",\"order\":4};;{\"field\":\"nama_kelurahan\",\"order\":5};;{\"field\":\"nama_tps\",\"order\":6};;{\"field\":\"no_hp\",\"order\":7}', '2020-08-17 03:14:31', '2020-09-13 03:22:56');
 INSERT INTO `t_setting_list` VALUES (5, 'kecamatan', 1, '{\"field\":\"nama_kecamatan\",\"order\":1};;{\"field\":\"jumlah_dpt\",\"order\":2}', '2020-08-27 00:41:05', '2020-09-05 21:36:05');
 INSERT INTO `t_setting_list` VALUES (6, 'kelurahan', 1, '{\"field\":\"nama_kelurahan\",\"order\":1};;{\"field\":\"nama_kecamatan\",\"order\":2};;{\"field\":\"jumlah_tps\",\"order\":3};;{\"field\":\"jumlah_dpt\",\"order\":4}', '2020-09-05 21:42:11', '2020-09-05 21:42:51');
-INSERT INTO `t_setting_list` VALUES (7, 'tim', 1, '{\"field\":\"nama_tim\",\"order\":1};;{\"field\":\"nama_ketua\",\"order\":2};;{\"field\":\"deskripsi\",\"order\":3};;{\"field\":\"jumlah_anggota\",\"order\":4}', '2020-09-06 17:07:06', NULL);
-INSERT INTO `t_setting_list` VALUES (8, 'konstituen-edit', 1, '{\"field\":\"nik\",\"order\":1};;{\"field\":\"nama\",\"order\":2};;{\"field\":\"nama_tim\",\"order\":3};;{\"field\":\"nama_kecamatan\",\"order\":4};;{\"field\":\"nama_kelurahan\",\"order\":5};;{\"field\":\"nama_tps\",\"order\":6};;{\"field\":\"no_hp\",\"order\":7}', '2020-08-17 03:14:31', '2020-09-01 20:35:32');
+INSERT INTO `t_setting_list` VALUES (8, 'konstituen-edit', 1, '{\"field\":\"nik\",\"order\":1};;{\"field\":\"nama\",\"order\":2};;{\"field\":\"nama_tim\",\"order\":3};;{\"field\":\"no_hp\",\"order\":4}', '2020-08-17 03:14:31', '2020-09-12 19:33:06');
 
 -- ----------------------------
 -- Table structure for t_user_login
@@ -411,11 +410,51 @@ FROM
 where 
 a.status_id = 1
 ORDER BY 
-b.nama_kecamatan,
-c.nama_kelurahan
-asc,
+-- b.nama_kecamatan,
+-- c.nama_kelurahan
+-- asc,
 f.nama_tim
-desc ;
+asc ;
+
+-- ----------------------------
+-- View structure for dpt_v_list
+-- ----------------------------
+DROP VIEW IF EXISTS `dpt_v_list`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `dpt_v_list` AS SELECT
+	a.id_dpt,
+	a.no_kk,
+	a.nik,
+	a.nama,
+	a.tempat_lahir,
+	a.tanggal_lahir,
+	a.jenis_kelamin,
+	a.alamat,
+	a.rt,
+	a.rw,
+	b.nama_kecamatan,
+	a.id_kecamatan,
+	c.nama_kelurahan,
+	a.id_kelurahan,
+	e.nama_tps,
+	a.id_tps,
+	f.nama_tim,
+	a.id_tim,
+	a.no_hp
+FROM
+	m_dpt a
+	LEFT JOIN m_kecamatan b ON ( a.id_kecamatan = b.id_kecamatan ) and b.status_id = 1
+	LEFT JOIN m_kelurahan c ON ( a.id_kelurahan = c.id_kelurahan ) and c.status_id = 1
+	LEFT JOIN m_tps e ON ( a.id_tps = e.id_tps ) and e.status_id = 1
+	left join m_tim f ON (a.id_tim = f.id_tim) and f.status_id = 1
+where 
+a.status_id = 1
+ORDER BY 
+-- b.nama_kecamatan,
+-- c.nama_kelurahan
+-- asc,
+f.nama_tim
+is null,
+f.nama_tim asc ;
 
 -- ----------------------------
 -- View structure for kecamatan_list
@@ -486,7 +525,7 @@ CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `tim_list` AS SELECT
 	t.nama_ketua,
 	t.deskripsi,
 	t.status_id,
-	count( a.id_dpt ) AS jumlah_anggota 
+	count( a.id_dpt ) AS konstituen 
 FROM
 	m_tim t
 	LEFT JOIN m_dpt a ON ( t.id_tim = a.id_tim ) 

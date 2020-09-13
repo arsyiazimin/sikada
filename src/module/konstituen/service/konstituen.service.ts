@@ -18,6 +18,7 @@ const Path = require('path');
 const Fs = require('fs');
 import { RequestContext } from '../../../common/subscriber/RequestContext';
 import { DptV } from '../entity/view/DptV.entity';
+import { DptVList } from '../entity/view/dptVList.entity';
 const capitalize = require('capitalize')
 
 @Injectable()
@@ -30,6 +31,7 @@ export class KonstituenService {
         @InjectRepository(TpsEntity) private readonly TpsEntityRepo: Repository<TpsEntity>,
         @InjectRepository(tKelTps) private readonly tKelTpsRepo: Repository<tKelTps>,
         @InjectRepository(DptV) private readonly DptVRepo: Repository<DptV>,
+        @InjectRepository(DptVList) private readonly DptVListRepo: Repository<DptVList>,
     ) { }
 
     __path = 'dist/src';
@@ -213,6 +215,19 @@ export class KonstituenService {
         }
     }
 
+    async getAllDataDptList(@Res() res): Promise<DptVList[]> {
+        try {
+            const data = await this.DptVListRepo.find()
+            return res
+                .status(HttpStatus.OK)
+                .json({ message: 'data found', response: data });
+        } catch (error) {
+            return res
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .json({ message: error.message });
+        }
+    }
+
     async filterData(filterVal, @Res() res): Promise<DptV[]> {
         try {
             let where: any = ''
@@ -238,7 +253,7 @@ export class KonstituenService {
                 where = `v.id_tim in (${filterVal.id_tim})`;
                 where_array.push(where)
             }
-            
+
             if (filterVal.nik !== null && filterVal.nik !== '') {
                 where = `LOWER(v.nik) like LOWER('%${filterVal.nik}%')`;
                 where_array.push(where)
@@ -246,6 +261,11 @@ export class KonstituenService {
 
             if (filterVal.nama !== null && filterVal.nama !== '') {
                 where = `LOWER(v.nama) like LOWER('%${filterVal.nama}%')`;
+                where_array.push(where)
+            }
+
+            if (filterVal.multi_search !== null && filterVal.multi_search !== '') {
+                where = `(LOWER(v.nama) like LOWER('%${filterVal.multi_search}%') OR LOWER(v.nik) like LOWER('%${filterVal.multi_search}%'))`;
                 where_array.push(where)
             }
 

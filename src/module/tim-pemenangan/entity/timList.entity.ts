@@ -18,5 +18,5 @@ export class timList {
     status_id: number
 
     @Column()
-    jumlah_anggota: number
+    konstituen: number
 }

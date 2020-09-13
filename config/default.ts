@@ -1,5 +1,6 @@
 export default {
-  HOST: 'https://127.0.0.1', // dev
+  HOST: 'https://localhost', // dev
+  // HOST: 'https://127.0.0.1', // prod
   // HOST: 'https://sikada-app.herokuapp.com/', // dev
   PORT: '3000', // dev
   SECRET: 'asdasf;qqwrlmsdfmafk;rqwelqkrjlsdffsdfdsjhfksrweriuosfpyuirewbfmsdfbmsdfiwher;dsf;rerkhjgkertkr',
@@ -10,13 +11,23 @@ export default {
     USE_EMAIL_TESTER: 'yes', //dev
     EMAIL_TO_TESTER: 'arsyiazimin@gmail.com'
   },
+  // db: {
+  //   DB_TYPE: 'mysql',
+  //   DB_HOST: '5.181.216.118',
+  //   DB_PORT: 3306,
+  //   DB_USER_NAME: 'u1113286_root',
+  //   DB_PASSWORD: 'sikadasuperuser',
+  //   DB_NAME: 'u1113286_sikada',
+  //   DB_SYNCHRONIZE: false,
+  //   DB_LOGGING: true
+  // },
   db: {
     DB_TYPE: 'mysql',
-    DB_HOST: '5.181.216.118',
+    DB_HOST: 'localhost',
     DB_PORT: 3306,
-    DB_USER_NAME: 'u1113286_root',
-    DB_PASSWORD: 'sikadasuperuser',
-    DB_NAME: 'u1113286_sikada',
+    DB_USER_NAME: 'root',
+    DB_PASSWORD: '',
+    DB_NAME: 'db_sikada',
     DB_SYNCHRONIZE: false,
     DB_LOGGING: true
   },
