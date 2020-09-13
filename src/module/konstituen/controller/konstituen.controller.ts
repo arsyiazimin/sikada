@@ -44,4 +44,9 @@ export class KonstituenController {
     async getAllData(@Res() res) {
         return await this.konstituenService.getAllData(res)
     }
+
+    @Get('getAllDataDptList')
+    async getAllDataDptList(@Res() res) {
+        return await this.konstituenService.getAllDataDptList(res)
+    }
 }
