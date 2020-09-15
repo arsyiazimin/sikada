@@ -161,8 +161,8 @@ export class KonstituenService {
                 //     throw new Error(error);
                 // })
 
-                // await queryRunner.commitTransaction();
-                await queryRunner.rollbackTransaction();
+                await queryRunner.commitTransaction();
+                // await queryRunner.rollbackTransaction();
                 return res
                     .status(HttpStatus.OK)
                     .json({ message: 'Save Successfully' });
