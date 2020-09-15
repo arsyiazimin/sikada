@@ -69,82 +69,97 @@ export class KonstituenService {
 
                         let insertdata = [];
                         let original = resFile.filename.split('-');
-                        let kec = original[1].toLowerCase();
-                        let kel = original[2].split('_');
-                        kel = kel[0].toLowerCase() + ' ' + kel[1].toLowerCase();
-                        let tps = original[3].split('.')[0].toLowerCase();
-
-                        const kecamatan = await getManager()
-                            .createQueryBuilder(Kecamatan, "kec")
-                            .leftJoinAndMapOne("kec.KEL", Kelurahan, "kel", "kec.id_kecamatan = kel.id_kecamatan")
-                            .leftJoin(tKelTps, "keltps", "kel.id_kelurahan = keltps.id_kelurahan")
-                            .leftJoinAndMapOne("kel.TPS", TpsEntity, "tps", "keltps.id_tps = tps.id_tps")
-                            .where("LOWER(kec.nama_kecamatan) = :kec", { kec: kec })
-                            .andWhere("LOWER(kel.nama_kelurahan) = :kel", { kel: kel })
-                            .andWhere("LOWER(tps.nama_tps) = :tps", { tps: 'tps-' + tps })
-                            .getOne()
-
-                        // const kecamatan = await getManager()
-                        //     .createQueryBuilder(Kecamatan, "kec")
-                        //     .where("LOWER(kec.nama_kecamatan) = :kec", { kec: kec })
-                        //     .getOne()
-
-                        // const kelurahan = await getManager()
-                        //     .createQueryBuilder(Kelurahan, "kel")
-                        //     .where("LOWER(kec.nama_kelurahan) = :kel", { kel: kel })
-                        //     .getOne();
-
-                        // const tpss = await getManager()
-                        //     .createQueryBuilder(TpsEntity, "tps")
-                        //     .andWhere("LOWER(tps.nama_tps) = :tps", { tps: 'tps-' + tps })
-                        //     .getOne()
-                        console.log(kecamatan)
-                        if (kecamatan) {
-                            for (let ind in getfiles) {
-                                let path = Path.resolve(this.__path, folder, resFile.filename);
-                                console.log('path')
-                                console.log(path)
-                                await csv({ trim: true }).fromFile(path)
-                                    .then((val) => {
-                                        insertdata = [...insertdata, ...val]
-                                    })
-                                    .catch((err) => {
-                                        throw new Error(err);
-                                    });
-                            };
-                            // console.log(insertdata)
-                            unlinkSync(`dist/src/file/${moment(new Date()).format('YYYY')}/data-konstituen/${resFile.filename}`)
-                            for (let index = 0; index < insertdata.length; index++) {
-                                let data = {
-                                    ...insertdata[index],
-                                    nama: capitalize.words(insertdata[index].nama),
-                                    id_kecamatan: kecamatan.id_kecamatan,
-                                    id_kelurahan: kecamatan['KEL'].id_kelurahan,
-                                    id_tps: kecamatan['KEL']['TPS'].id_tps,
-                                    create_id: RequestContext.currentUser().login_id,
-                                    create_date: new Date()
-                                }
-                                // console.log(data)
-                                let dataExisting = await this.dptRepo.findOne({ where: { no_kk: insertdata[index].no_kk, nik: insertdata[index].nik } })
-                                if (dataExisting) {
-                                    throw new Error(`No KK : ${dataExisting.no_kk} dengan NIK : ${dataExisting.nik} Sudah ada`);
+                        if (original[1] && original[2]) {
+                            let kec = original[1].toLowerCase();
+                            let kel = original[2].split('_');
+                            console.log(kel)
+                            let kelName = ''
+                            kel.forEach((element, index) => {
+                                if (kel.length - 1 === index) {
+                                    kelName += element.split('.')[0].toLowerCase();
                                 } else {
-                                    readyinsertdata.push(data)
+                                    kelName += element.toLowerCase() + ' '
                                 }
+                            });
+                            console.log(kelName)
+    
+                            const kecamatan = await getManager()
+                                .createQueryBuilder(Kecamatan, "kec")
+                                .leftJoinAndMapOne("kec.KEL", Kelurahan, "kel", "kec.id_kecamatan = kel.id_kecamatan")
+                                .leftJoin(tKelTps, "keltps", "kel.id_kelurahan = keltps.id_kelurahan")
+                                .leftJoinAndMapMany("kel.TPS", TpsEntity, "tps", "keltps.id_tps = tps.id_tps")
+                                .where("LOWER(kec.nama_kecamatan) = :kec", { kec: kec })
+                                .andWhere("LOWER(kel.nama_kelurahan) = :kel", { kel: kelName })
+                                .getOne()
+    
+                            if (kecamatan) {
+                                for (let ind in getfiles) {
+                                    let path = Path.resolve(this.__path, folder, resFile.filename);
+                                    console.log('path')
+                                    console.log(path)
+                                    await csv({ trim: true }).fromFile(path)
+                                        .then((val) => {
+                                            insertdata = [...insertdata, ...val]
+                                        })
+                                        .catch((err) => {
+                                            throw new Error(err);
+                                        });
+                                };
+                                // console.log(insertdata)
+                                unlinkSync(`dist/src/file/${moment(new Date()).format('YYYY')}/data-konstituen/${resFile.filename}`)
+                                for (let index = 0; index < insertdata.length; index++) {
+                                    let tpsid: number
+                                    for (let i = 0; i < kecamatan.KEL.TPS.length; i++) {
+                                        let namaTps = kecamatan.KEL.TPS[i].nama_tps.split('-')
+                                        if (namaTps[1] == insertdata[index].tps) {
+                                            tpsid = kecamatan.KEL.TPS[i].id_tps
+                                        }
+                                    }
+                                    let data = {
+                                        ...insertdata[index],
+                                        nama: capitalize.words(insertdata[index].nama),
+                                        id_kecamatan: kecamatan.id_kecamatan,
+                                        id_kelurahan: kecamatan.KEL.id_kelurahan,
+                                        id_tps: tpsid,
+                                        create_id: RequestContext.currentUser().login_id,
+                                        create_date: new Date(),
+                                        status_id: 1,
+                                        tempat_lahir: capitalize.words(insertdata[index].tempat_lahir),
+                                        alamat: capitalize.words(insertdata[index].alamat),
+                                        // keterangan: capitalize.words(insertdata[index].keterangan),
+                                    }
+                                    // console.log('insertdata[index].nik')
+                                    // console.log(insertdata[index].no_kk, index, insertdata[index].nama)
+                                    if (insertdata[index].nik.length === 16 && insertdata[index].no_kk.length === 16) {
+                                        let dataExisting = await this.dptRepo.findOne({ where: { no_kk: insertdata[index].no_kk, nik: insertdata[index].nik } })
+                                        if (dataExisting) {
+                                            throw new Error(`No KK : ${dataExisting.no_kk} dengan NIK : ${dataExisting.nik} Sudah ada`);
+                                        } else {
+                                            // readyinsertdata.push(data)
+                                            const dataDPT = await this.dptRepo.create(data)
+                                            await queryRunner.manager.save(dataDPT).catch(async error => {
+                                                throw new Error(error);
+                                            })
+                                        }
+                                    } else {
+                                        throw new Error('No KK atau NIK salah');
+                                    }
+                                }
+    
+                            } else {
+                                throw new Error('Kecamatan atau kelurahan tidak ditemukan, Silahkan masukkan master kecamatan dan kelurahan');
                             }
-
                         } else {
-                            return res
-                                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                .json({ message: 'No Data Found' });
+                            throw new Error(`Format nama file salah. contoh: 'MAKASSAR-BARA_BARAYA.csv'`);
                         }
+
                     }
                 }
 
-                const dataDPT = await this.dptRepo.create(readyinsertdata)
-                await queryRunner.manager.save(dataDPT).catch(async error => {
-                    throw new Error(error);
-                })
+                // const dataDPT = await this.dptRepo.create(readyinsertdata)
+                // await queryRunner.manager.save(dataDPT).catch(async error => {
+                //     throw new Error(error);
+                // })
 
                 await queryRunner.commitTransaction();
                 // await queryRunner.rollbackTransaction();
@@ -158,10 +173,11 @@ export class KonstituenService {
             }
 
         } catch (error) {
+            console.log(error)
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error.message.message });
+                .json({ message: error.message });
         } finally {
             await queryRunner.release();
         }
