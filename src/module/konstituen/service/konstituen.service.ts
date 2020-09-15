@@ -126,7 +126,7 @@ export class KonstituenService {
                                         status_id: 1,
                                         tempat_lahir: capitalize.words(insertdata[index].tempat_lahir),
                                         alamat: capitalize.words(insertdata[index].alamat),
-                                        // keterangan: capitalize.words(insertdata[index].keterangan),
+                                        keterangan: insertdata[index].keterangan ? capitalize.words(insertdata[index].keterangan) : null,
                                     }
                                     // console.log('insertdata[index].nik')
                                     // console.log(insertdata[index].no_kk, index, insertdata[index].nama)
@@ -161,8 +161,8 @@ export class KonstituenService {
                 //     throw new Error(error);
                 // })
 
-                await queryRunner.commitTransaction();
-                // await queryRunner.rollbackTransaction();
+                // await queryRunner.commitTransaction();
+                await queryRunner.rollbackTransaction();
                 return res
                     .status(HttpStatus.OK)
                     .json({ message: 'Save Successfully' });
