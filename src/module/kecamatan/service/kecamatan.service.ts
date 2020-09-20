@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Kecamatan } from '../../../module/konstituen/entity/kecamatan.entity';
 import { Repository, getManager } from 'typeorm';
 import { async } from 'rxjs';
-import { KecamatanListEntity } from 'module/konstituen/entity/view/kecamatan-list.entity';
+import { KecamatanListEntity } from '../../../module/konstituen/entity/view/kecamatan-list.entity';
 
 @Injectable()
 export class KecamatanService {
@@ -32,7 +32,7 @@ export class KecamatanService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         } finally {
             await queryRunner.release();
         }
@@ -54,20 +54,20 @@ export class KecamatanService {
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         }
     }
 
     async getAllKecamatan(@Res() res): Promise<Kecamatan[]> {
         try {
-            const data = await this.kecamatanRepo.find();
+            const data = await this.kecamatanRepo.find({ where: { status_id: 1 } });
             return res
                 .status(HttpStatus.OK)
                 .json({ message: 'data found', response: data });
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         }
     }
 
@@ -99,7 +99,7 @@ export class KecamatanService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         } finally {
             await queryRunner.release();
         }
@@ -131,24 +131,24 @@ export class KecamatanService {
             await queryRunner.rollbackTransaction();
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({ message: error });
+                .json({ message: error.message });
         } finally {
             await queryRunner.release();
         }
     }
 
-    async kecamatanList(@Res()res){
+    async kecamatanList(@Res() res) {
         try {
             const data = await getManager()
-                .createQueryBuilder(KecamatanListEntity,"kec_list")
+                .createQueryBuilder(KecamatanListEntity, "kec_list")
                 .getMany();
             return res
                 .status(HttpStatus.OK)
-                .json({message: 'data found', response: data});
+                .json({ message: 'data found', response: data });
         } catch (error) {
             return res
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json({message:error})
+                .json({ message: error.message })
         }
     }
 }

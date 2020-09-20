@@ -5,10 +5,15 @@ import { DptEntity } from "./dpt.entity";
 @Entity('m_kecamatan')
 export class Kecamatan {
     @PrimaryGeneratedColumn()
-    id_kecamatan : number;
+    id_kecamatan: number;
 
     @Column()
     nama_kecamatan: string;
+
+    @Column()
+    status_id: number
+
+    KEL: Kelurahan
 
     @OneToMany(type => DptEntity, dpt => dpt.KECAMATAN, { cascade: ['insert', 'update'], onDelete: 'CASCADE' })
     DPT: DptEntity[]

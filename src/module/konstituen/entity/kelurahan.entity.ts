@@ -14,6 +14,11 @@ export class Kelurahan {
     @Column()
     id_kecamatan: number;
 
+    @Column()
+    status_id: number
+
+    TPS: TpsEntity[]
+
     @ManyToOne(type => Kecamatan, kec => kec.KELURAHAN, { cascade: true, onDelete: 'CASCADE' })
     @JoinColumn({name: 'id_kecamatan'})
     KECAMATAN: Kecamatan

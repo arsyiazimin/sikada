@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule  } from './app.module';
+import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Transport } from '@nestjs/microservices';
 import * as helmet from 'helmet';
@@ -40,7 +40,7 @@ async function bootstrap() {
     ? `${AppModule.host}:${AppModule.port}`
     : `${AppModule.host}:${AppModule.port}`;
   console.log(hostDomain);
-  
+
   const swaggerOptions = new DocumentBuilder()
     .setTitle('API')
     .setDescription('API Documentation')

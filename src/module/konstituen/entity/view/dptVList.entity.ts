@@ -1,7 +1,7 @@
 import { Entity, PrimaryColumn, Column } from "typeorm";
 
-@Entity('dpt_v')
-export class DptV {
+@Entity('dpt_v_list')
+export class DptVList {
     @PrimaryColumn()
     id_dpt: number;
 

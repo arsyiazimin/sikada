@@ -1,8 +1,8 @@
 import { Injectable, Res, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DptEntity } from 'module/konstituen/entity/dpt.entity';
+import { DptEntity } from '../../../module/konstituen/entity/dpt.entity';
 import { Repository } from 'typeorm';
-import { DptV } from 'module/konstituen/entity/view/DptV.entity';
+import { DptV } from '../../../module/konstituen/entity/view/DptV.entity';
 
 @Injectable()
 export class RealcountService {

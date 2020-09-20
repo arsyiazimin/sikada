@@ -11,6 +11,7 @@ import { DptEntity } from './entity/dpt.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { tKelTps } from './entity/tpKel.entity';
 import { DptV } from './entity/view/DptV.entity';
+import { DptVList } from './entity/view/dptVList.entity';
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import { DptV } from './entity/view/DptV.entity';
       Kecamatan,
       DptEntity,
       tKelTps,
-      DptV
+      DptV,
+      DptVList
     ])
   ],
   controllers: [KonstituenController],
