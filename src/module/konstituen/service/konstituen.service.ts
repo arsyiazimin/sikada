@@ -277,4 +277,5 @@ export class KonstituenService {
             await queryRunner.release();
         }
     }
+
 }
