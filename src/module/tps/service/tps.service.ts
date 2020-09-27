@@ -72,7 +72,17 @@ export class TpsService {
 
     async getAllTps(@Res() res): Promise<TpsEntity[]> {
         try {
-            const data = await this.tpsRepo.find({ where: { status_id: 1 } });
+            const data = await this.tpsRepo.find(
+                {
+                    join: {
+                        alias: 't',
+                        leftJoinAndSelect: {
+                            kel: 't.T_KEL_TPS'
+                        }
+                    },
+                    where: { status_id: 1 }
+                }
+            );
             return res
                 .status(HttpStatus.OK)
                 .json({ message: 'data found', response: data });

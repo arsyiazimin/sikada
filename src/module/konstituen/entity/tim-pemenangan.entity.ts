@@ -18,6 +18,9 @@ export class TimPemenangan {
     @Column()
     deskripsi: string;
 
+    @Column()
+    id_ketua_tim: number
+
     // @OneToMany(type => DptEntity, dpt => dpt.tim_dpt)
     // DPT: DptEntity
 

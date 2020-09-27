@@ -1,22 +1,25 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('ketua_tim')
-export class KetuaTim{
+export class KetuaTim {
     @PrimaryGeneratedColumn()
-    id_ketua_tim:number;
+    id_ketua_tim: number;
 
     @Column()
-    nik:number;
+    nik: string;
 
     @Column()
-    nama_ketua:string;
+    nama_ketua: string;
 
     @Column()
-    tempat_lahir:string;
+    tempat_lahir: string;
 
     @Column()
-    tanggal_lahir:Date;
+    tanggal_lahir: Date;
 
     @Column()
-    alamat:string;
+    alamat: string;
+
+    @Column()
+    status_id: number
 }
