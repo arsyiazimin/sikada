@@ -19,6 +19,10 @@ import { KecamatanModule } from './module/kecamatan/kecamatan.module';
 import { TimPemenanganModule } from './module/tim-pemenangan/tim-pemenangan.module';
 import { Connection } from 'typeorm';
 import { RealcountModule } from './module/realcount/realcount.module';
+import { KandidatModule } from 'module/kandidat/kandidat.module';
+import { AnggotaTimModule } from 'module/tim-pemenangan/anggota-tim/anggota-tim.module';
+import { KetuaTimModule } from 'module/tim-pemenangan/ketua-tim/ketua-tim.module';
+
 
 @Module({
   imports: [
@@ -34,6 +38,9 @@ import { RealcountModule } from './module/realcount/realcount.module';
     KecamatanModule,
     TimPemenanganModule,
     RealcountModule,
+    KandidatModule,
+    AnggotaTimModule,
+    KetuaTimModule
   ]
 })
 export class AppModule implements NestModule {
